@@ -33,6 +33,10 @@
 
 PROGNAME="CuteSeCo"
 VERSION="0.0.1"
+#STATE="final"
+#STATE="beta"
+#STATE="alpha"
+STATE="experimental"
 
 
 # Qt libraries
@@ -113,10 +117,10 @@ win32:GIT_VERSION = $$system($${GIT_CMD} 2> NUL)
 
 
 # export definitions
-DEFINES += PROJECT_PROGNAME="'\"$${PROGNAME}\"'"
+DEFINES += PROJECT_PROGNAME="'\"$${TARGET}\"'"
 DEFINES += PROJECT_VERSION="'\"$${VERSION}\"'"
-DEFINES += PROJECT_BUILDNO="'\"$${BUILDNO}\"'"
 DEFINES += PROJECT_GIT_VERSION="'\"$${GIT_VERSION}\"'"
+DEFINES += PROJECT_STATE="'\"$${STATE}\"'"
 message("$${TARGET}    "\
         "Version: $${VERSION}    "\
         "Build: $${BUILDNO}    "\
@@ -228,6 +232,7 @@ SOURCES += \
     logger/loggertypedelegate.cpp
 
 HEADERS += \
+    buildno.h \
     cuteseco.h \
     about/aboutdialog.h \
     logger/logger.h \

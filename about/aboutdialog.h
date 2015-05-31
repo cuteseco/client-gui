@@ -41,6 +41,8 @@
 #include <QFileInfo>
 #include <QTextStream>
 
+#include "buildno.h"
+
 namespace Ui {
 class AboutDialog;
 }
