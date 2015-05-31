@@ -32,28 +32,41 @@
  * Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
-#include "cuteseco.h"
-#include <QApplication>
+#ifndef LOGGER_H
+#define LOGGER_H
 
-#include "logger/logger.h"
+#include <QObject>
+#include <QTextStream>
+#include <QDateTime>
 
-Q_GLOBAL_STATIC(Logger, _LOGGER)
+#include "logger/logger_include.h"
+#include "logger/loggertypedelegate.h"
 
-void log(QString logtext, LOG_TYPE type)
+class Logger : public QObject
 {
-    if (_LOGGER->globalInstance())
-        _LOGGER->globalInstance()->add("main:: "+logtext, type);
-}
+    Q_OBJECT
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
+public:
+    explicit Logger(QObject *parent = 0);
+    ~Logger();
 
-    log(QString("%1 is starting.").arg(PROJECT_PROGNAME),
-        LOG_DEBUGINFO);
+    static Logger* globalInstance();
+    void init();
+    void setVerboseLevel(int level);
 
-    CuteSeCo w;
-    w.show();
+signals:
+    void logoutput(QString logtext, LOG_TYPE type);
 
-    return a.exec();
-}
+public slots:
+    void add(QString logtext, LOG_TYPE type);
+
+private slots:
+    void addLog(QString logtext, LOG_TYPE type);
+
+private:
+    LoggerTypeDelegate  *loggerTypeDelegate;
+    bool                initialized;
+    int                 verbose_level;
+};
+
+#endif // LOGGER_H

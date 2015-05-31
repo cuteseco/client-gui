@@ -32,28 +32,28 @@
  * Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
-#include "cuteseco.h"
-#include <QApplication>
+#ifndef LOGGER_INCLUDE
+#define LOGGER_INCLUDE
 
-#include "logger/logger.h"
+#define LOG_SECURITYERROR_COLOR      QColor(Qt::red)
+#define LOG_ERROR_COLOR              QColor(Qt::red)
+#define LOG_WARNING_COLOR            QColor(Qt::yellow)
+#define LOG_SECURITYINFO_COLOR       QColor(Qt::green)
+#define LOG_INFO_COLOR               QColor(Qt::green)
+#define LOG_DEBUGINFO_COLOR          QColor(Qt::green)
+#define LOG_DEBUGDETAILINFO_COLOR    QColor(Qt::green)
 
-Q_GLOBAL_STATIC(Logger, _LOGGER)
+enum LOG_TYPES {
+    LOG_SECURITYERROR,
+    LOG_ERROR,
+    LOG_WARNING,
+    LOG_SECURITYINFO,
+    LOG_INFO,
+    LOG_DEBUGINFO,
+    LOG_DEBUGDETAILINFO
+};
+typedef enum LOG_TYPES LOG_TYPE;
 
-void log(QString logtext, LOG_TYPE type)
-{
-    if (_LOGGER->globalInstance())
-        _LOGGER->globalInstance()->add("main:: "+logtext, type);
-}
+Q_DECLARE_METATYPE(LOG_TYPE);
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-
-    log(QString("%1 is starting.").arg(PROJECT_PROGNAME),
-        LOG_DEBUGINFO);
-
-    CuteSeCo w;
-    w.show();
-
-    return a.exec();
-}
+#endif // LOGGER_INCLUDE

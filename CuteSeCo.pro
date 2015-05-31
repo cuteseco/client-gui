@@ -16,10 +16,15 @@ DEFINES += PROJECT_PROGNAME="'\"CuteSeCo\"'"
 
 SOURCES += main.cpp\
         cuteseco.cpp \
-    about/aboutdialog.cpp
+    about/aboutdialog.cpp \
+    logger/logger.cpp \
+    logger/loggertypedelegate.cpp
 
 HEADERS  += cuteseco.h \
-    about/aboutdialog.h
+    about/aboutdialog.h \
+    logger/logger.h \
+    logger/logger_include.h \
+    logger/loggertypedelegate.h
 
 FORMS    += cuteseco.ui \
     about/aboutdialog.ui

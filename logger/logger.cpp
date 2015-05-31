@@ -32,28 +32,70 @@
  * Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
-#include "cuteseco.h"
-#include <QApplication>
+/* singleton Logger
+ */
 
-#include "logger/logger.h"
+#include "logger.h"
 
 Q_GLOBAL_STATIC(Logger, _LOGGER)
 
-void log(QString logtext, LOG_TYPE type)
+#undef _MYNAME
+#define _MYNAME QString("Logger:: ")
+
+Logger::Logger(QObject *parent) :
+    QObject(parent)
 {
-    if (_LOGGER->globalInstance())
-        _LOGGER->globalInstance()->add("main:: "+logtext, type);
+    loggerTypeDelegate = NULL;
+    initialized = false;
+    verbose_level = LOG_DEBUGDETAILINFO;
 }
 
-int main(int argc, char *argv[])
+Logger* Logger::globalInstance()
 {
-    QApplication a(argc, argv);
+    return _LOGGER;
+}
 
-    log(QString("%1 is starting.").arg(PROJECT_PROGNAME),
-        LOG_DEBUGINFO);
+Logger::~Logger()
+{
+}
 
-    CuteSeCo w;
-    w.show();
+void Logger::init()
+{
+    if (initialized)
+        return;
 
-    return a.exec();
+    initialized = true;
+
+    connect(_LOGGER->globalInstance(), SIGNAL(logoutput(QString,LOG_TYPE)),
+            _LOGGER->globalInstance(), SLOT(addLog(QString,LOG_TYPE)));
+}
+
+void Logger::setVerboseLevel(int level)
+{
+    verbose_level = level;
+}
+
+void Logger::add(QString logtext, LOG_TYPE type)
+{
+    if (!initialized)
+        init();
+
+    emit logoutput(logtext, type);
+}
+
+void Logger::addLog(QString logtext, LOG_TYPE type)
+{
+    if (!initialized)
+        init();
+
+    if (type > verbose_level)
+        return;
+
+    QTextStream(stderr)
+            << QDateTime::currentDateTime().toString("dd.MM.yyyy HH:mm:ss")
+            << " "
+            << LoggerTypeDelegate::type2string(type)
+            << " "
+            << logtext
+            << endl;
 }

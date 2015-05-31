@@ -32,28 +32,28 @@
  * Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
-#include "cuteseco.h"
-#include <QApplication>
+#ifndef LOGGERTYPEDELEGATE_H
+#define LOGGERTYPEDELEGATE_H
 
-#include "logger/logger.h"
+#include <QStyledItemDelegate>
+#include <QPainter>
 
-Q_GLOBAL_STATIC(Logger, _LOGGER)
+#include "logger/logger_include.h"
 
-void log(QString logtext, LOG_TYPE type)
+class LoggerTypeDelegate : public QStyledItemDelegate
 {
-    if (_LOGGER->globalInstance())
-        _LOGGER->globalInstance()->add("main:: "+logtext, type);
-}
+    Q_OBJECT
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
+public:
+    LoggerTypeDelegate(QObject *parent = 0);
+    ~LoggerTypeDelegate();
 
-    log(QString("%1 is starting.").arg(PROJECT_PROGNAME),
-        LOG_DEBUGINFO);
+    void paint(QPainter *painter,
+               const QStyleOptionViewItem &option,
+               const QModelIndex &index
+               ) const;
 
-    CuteSeCo w;
-    w.show();
+    static QString type2string(int type);
+};
 
-    return a.exec();
-}
+#endif // LOGGERTYPEDELEGATE_H
