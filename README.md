@@ -1,0 +1,2 @@
+# client-gui
+CuteSeCo GUI
