@@ -43,6 +43,11 @@ AboutDialog::AboutDialog(QWidget *parent) :
     setWindowTitle(tr("About %1").arg(PROJECT_PROGNAME));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
+    ui->l_version->setText(tr("%1  %2 Build: %3")
+                           .arg(PROJECT_PROGNAME)
+                           .arg(PROJECT_VERSION)
+                           .arg(PROJECT_BUILDNO)
+                           );
     ui->tBrowser_about->viewport()->setAutoFillBackground(false);
     ui->tBrowser_license->viewport()->setAutoFillBackground(false);
 

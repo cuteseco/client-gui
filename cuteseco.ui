@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>CuteSeCo</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/images/logos/CuteSeCo_logo.svg</normaloff>:/images/logos/CuteSeCo_logo.svg</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget"/>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -59,6 +63,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

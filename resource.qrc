@@ -4,5 +4,7 @@
         <file>about/about_de.html</file>
         <file>about/about_en.html</file>
         <file>about/stylesheet.css</file>
+        <file>images/logos/Qt_logo.svg</file>
+        <file>images/logos/CuteSeCo_logo.svg</file>
     </qresource>
 </RCC>

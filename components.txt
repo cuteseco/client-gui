@@ -1,0 +1,1 @@
+images/logos/Qt_logo.svg    The Qt Company Ltd.     http://qt.io

@@ -10,6 +10,10 @@
     <height>520</height>
    </rect>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resource.qrc">
+    <normaloff>:/images/logos/CuteSeCo_logo.svg</normaloff>:/images/logos/CuteSeCo_logo.svg</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -97,7 +101,7 @@
        <item>
         <widget class="QLabel" name="l_maincontributors">
          <property name="text">
-          <string>&lt;b&gt;main contributors:&lt;/b&gt;&lt;br&gt;</string>
+          <string>&lt;br&gt;&lt;b&gt;main contributors:&lt;/b&gt;&lt;br&gt;</string>
          </property>
          <property name="textFormat">
           <enum>Qt::RichText</enum>
@@ -187,9 +191,9 @@
         <number>15</number>
        </property>
        <item>
-        <widget class="QLabel" name="l_lang_english">
+        <widget class="QLabel" name="l_lang_german">
          <property name="text">
-          <string>&lt;b&gt;English:&lt;/b&gt;&lt;br&gt;</string>
+          <string>&lt;br&gt;&lt;b&gt;Deutsch (german):&lt;/b&gt;&lt;br&gt;</string>
          </property>
          <property name="textFormat">
           <enum>Qt::RichText</enum>
@@ -213,9 +217,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="l_lang_german">
+        <widget class="QLabel" name="l_lang_english">
          <property name="text">
-          <string>&lt;br&gt;&lt;b&gt;Deutsch (german):&lt;/b&gt;&lt;br&gt;</string>
+          <string>&lt;br&gt;&lt;b&gt;English:&lt;/b&gt;&lt;br&gt;</string>
          </property>
          <property name="textFormat">
           <enum>Qt::RichText</enum>
@@ -294,7 +298,7 @@
       <item>
        <widget class="QFrame" name="frame_qt">
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::NoFrame</enum>
         </property>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
@@ -302,6 +306,10 @@
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <widget class="QPushButton" name="pB_qt">
+           <property name="icon">
+            <iconset resource="../resource.qrc">
+             <normaloff>:/images/logos/Qt_logo.svg</normaloff>:/images/logos/Qt_logo.svg</iconset>
+           </property>
            <property name="iconSize">
             <size>
              <width>75</width>
@@ -336,18 +344,31 @@
     </widget>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Close</set>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="l_version">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Close</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resource.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

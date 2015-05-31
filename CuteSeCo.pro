@@ -129,7 +129,7 @@ message("$${TARGET}    "\
 # increment build no
 increment-buildno.commands = @echo INFO: incrementing build no $${CONCAT}
 unix:increment-buildno.commands += \
-    $${PWD}/SCRIPTS/increment-buildno $${PWD}/buildno
+    $${PWD}/SCRIPTS/increment-buildno $${PWD}/buildno $${CONCAT}
 PRE_TARGETDEPS += increment-buildno
 QMAKE_EXTRA_TARGETS += increment-buildno
 
@@ -257,6 +257,7 @@ CODECFORSRC = UTF-8
 OTHER_FILES += \
     buildno \
     CHANGELOG.txt \
+    components.txt \
     LICENSE \
     LICENSE_HEADER \
     README.md \
