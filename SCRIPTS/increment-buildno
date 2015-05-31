@@ -1,0 +1,5 @@
+#!/bin/bash
+f=$1
+touch $f &> /dev/null
+BUILDNO=`cat $f`
+echo $(($BUILDNO+1)) > $f
