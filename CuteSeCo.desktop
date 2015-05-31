@@ -1,0 +1,16 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=CuteSeCo
+Icon=CuteSeCo
+Version=
+Type=Application
+GenericName=Coorporation
+Comment=Cute Secure Coorporation
+Comment[de]=vertrauliche Zusammenarbeit
+Categories=Network;InstantMessaging;
+Keywords=chat;messaging;im;
+StartupNotify=true
+Terminal=false
+Encoding=UTF-8
+Exec=
+Path=
