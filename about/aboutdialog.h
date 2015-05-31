@@ -32,34 +32,37 @@
  * Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CUTESECO_H
-#define CUTESECO_H
+#ifndef ABOUTDIALOG_H
+#define ABOUTDIALOG_H
 
-#include <QMainWindow>
-
-#include <about/aboutdialog.h>
+#include <QDialog>
+#include <QMessageBox>
+#include <QFile>
+#include <QFileInfo>
+#include <QTextStream>
 
 namespace Ui {
-class CuteSeCo;
+class AboutDialog;
 }
 
-class CuteSeCo : public QMainWindow
+class AboutDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit CuteSeCo(QWidget *parent = 0);
-    ~CuteSeCo();
+    explicit AboutDialog(QWidget *parent = 0);
+    ~AboutDialog();
+
+protected:
+    void changeEvent(QEvent *event);
 
 private slots:
-    void on_action_Quit_triggered();
-    void on_action_About_triggered();
+    void on_pB_qt_clicked();
 
 private:
-    Ui::CuteSeCo *ui;
+    Ui::AboutDialog *ui;
 
-    // Dialogs
-    AboutDialog     *aboutDialog;
+    void loadingHtmlContent();
 };
 
-#endif // CUTESECO_H
+#endif // ABOUTDIALOG_H

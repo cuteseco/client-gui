@@ -32,29 +32,70 @@
  * Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
-#include "cuteseco.h"
-#include "ui_cuteseco.h"
+#include "aboutdialog.h"
+#include "ui_aboutdialog.h"
 
-CuteSeCo::CuteSeCo(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::CuteSeCo)
+AboutDialog::AboutDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::AboutDialog)
 {
     ui->setupUi(this);
+    setWindowTitle(tr("About %1").arg(PROJECT_PROGNAME));
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
-    aboutDialog = new AboutDialog();
+    ui->tBrowser_about->viewport()->setAutoFillBackground(false);
+    ui->tBrowser_license->viewport()->setAutoFillBackground(false);
+
+    loadingHtmlContent();
 }
 
-CuteSeCo::~CuteSeCo()
+AboutDialog::~AboutDialog()
 {
     delete ui;
 }
 
-void CuteSeCo::on_action_Quit_triggered()
+void AboutDialog::changeEvent(QEvent *event)
 {
-    qApp->quit();
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+        loadingHtmlContent();
+    }
+    QDialog::changeEvent(event);
 }
 
-void CuteSeCo::on_action_About_triggered()
+/* loading html content
+ */
+void AboutDialog::loadingHtmlContent()
 {
-    aboutDialog->show();
+    QString fileName(":/about/about_de.html");
+
+    QFileInfo fileInfo(fileName);
+
+    if (!fileInfo.exists())
+        fileName = ":/about/about_en.html";
+
+    QFile about_file(fileName);
+    if (about_file.open(QFile::ReadOnly|QFile::Text))
+    {
+        QTextStream istream(&about_file);
+        istream.setCodec("UTF-8");
+        ui->tBrowser_about->setHtml(istream.readAll());
+        about_file.close();
+    }
+
+    QFile license_file(":/LICENSE");
+    if (license_file.open(QFile::ReadOnly|QFile::Text))
+    {
+        QTextStream istream(&license_file);
+        istream.setCodec("UTF-8");
+        ui->tBrowser_license->setText(istream.readAll());
+        license_file.close();
+    }
+
+}
+
+void AboutDialog::on_pB_qt_clicked()
+{
+    QMessageBox::aboutQt(this, tr("%1 uses Qt").arg(PROJECT_PROGNAME));
 }

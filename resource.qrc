@@ -1,2 +1,8 @@
-<RCC/>
-
+<RCC>
+    <qresource prefix="/">
+        <file>LICENSE</file>
+        <file>about/about_de.html</file>
+        <file>about/about_en.html</file>
+        <file>about/stylesheet.css</file>
+    </qresource>
+</RCC>

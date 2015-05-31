@@ -11,13 +11,18 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = CuteSeCo
 TEMPLATE = app
 
+DEFINES += PROJECT_PROGNAME="'\"CuteSeCo\"'"
+
 
 SOURCES += main.cpp\
-        cuteseco.cpp
+        cuteseco.cpp \
+    about/aboutdialog.cpp
 
-HEADERS  += cuteseco.h
+HEADERS  += cuteseco.h \
+    about/aboutdialog.h
 
-FORMS    += cuteseco.ui
+FORMS    += cuteseco.ui \
+    about/aboutdialog.ui
 
 RESOURCES += \
     resource.qrc
