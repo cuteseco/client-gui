@@ -43,8 +43,8 @@ STATE="experimental"
 QT += core
 QT += gui
 QT += widgets
+QT += network
 #QT += sql
-#QT += network
 #QT += webkitwidgets
 #QT += svg
 #QT += printsupport
@@ -70,6 +70,7 @@ CONFIG += static
 # Development (debug build)
 CONFIG(debug, debug|release) {
     TARGET = "$${TARGET}Developer"
+    DEFINES += PROJECT_DEVELOPERMODE
     # windows only:
     DLLSUFFIX = "d"
 } else
@@ -229,7 +230,8 @@ SOURCES += \
     cuteseco.cpp \
     about/aboutdialog.cpp \
     logger/logger.cpp \
-    logger/loggertypedelegate.cpp
+    logger/loggertypedelegate.cpp \
+    config/config.cpp
 
 HEADERS += \
     buildno.h \
@@ -237,7 +239,8 @@ HEADERS += \
     about/aboutdialog.h \
     logger/logger.h \
     logger/loggertypedelegate.h \
-    logger/logger_include.h
+    logger/logger_include.h \
+    config/config.h
 
 FORMS += \
     cuteseco.ui \

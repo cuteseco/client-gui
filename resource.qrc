@@ -6,5 +6,9 @@
         <file>about/stylesheet.css</file>
         <file>images/logos/Qt_logo.svg</file>
         <file>images/logos/CuteSeCo_logo.svg</file>
+        <file>images/bug.svg</file>
+        <file>images/info.svg</file>
+        <file>images/switch.svg</file>
+        <file>images/wrench.svg</file>
     </qresource>
 </RCC>

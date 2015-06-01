@@ -52,11 +52,19 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_Quit">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/switch.svg</normaloff>:/images/switch.svg</iconset>
+   </property>
    <property name="text">
     <string>&amp;Quit</string>
    </property>
   </action>
   <action name="action_About">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/info.svg</normaloff>:/images/info.svg</iconset>
+   </property>
    <property name="text">
     <string>&amp;About</string>
    </property>

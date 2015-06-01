@@ -42,6 +42,8 @@
 #include "logger/logger_include.h"
 #include "logger/loggertypedelegate.h"
 
+#define _MYNAME                 QString(this->metaObject()->className())+":: "
+
 class Logger : public QObject
 {
     Q_OBJECT
@@ -61,10 +63,9 @@ public slots:
     void add(QString logtext, LOG_TYPE type);
 
 private slots:
-    void addLog(QString logtext, LOG_TYPE type);
+    void internal_add(QString logtext, LOG_TYPE type);
 
 private:
-    LoggerTypeDelegate  *loggerTypeDelegate;
     bool                initialized;
     int                 verbose_level;
 };

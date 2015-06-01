@@ -39,13 +39,9 @@
 
 Q_GLOBAL_STATIC(Logger, _LOGGER)
 
-#undef _MYNAME
-#define _MYNAME QString("Logger:: ")
-
 Logger::Logger(QObject *parent) :
     QObject(parent)
 {
-    loggerTypeDelegate = NULL;
     initialized = false;
     verbose_level = LOG_DEBUGDETAILINFO;
 }
@@ -64,10 +60,10 @@ void Logger::init()
     if (initialized)
         return;
 
-    initialized = true;
-
     connect(_LOGGER->globalInstance(), SIGNAL(logoutput(QString,LOG_TYPE)),
-            _LOGGER->globalInstance(), SLOT(addLog(QString,LOG_TYPE)));
+            _LOGGER->globalInstance(), SLOT(internal_add(QString,LOG_TYPE)));
+
+    initialized = true;
 }
 
 void Logger::setVerboseLevel(int level)
@@ -77,16 +73,14 @@ void Logger::setVerboseLevel(int level)
 
 void Logger::add(QString logtext, LOG_TYPE type)
 {
-    if (!initialized)
-        init();
+    init();
 
     emit logoutput(logtext, type);
 }
 
-void Logger::addLog(QString logtext, LOG_TYPE type)
+void Logger::internal_add(QString logtext, LOG_TYPE type)
 {
-    if (!initialized)
-        init();
+    init();
 
     if (type > verbose_level)
         return;
