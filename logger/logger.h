@@ -43,6 +43,7 @@
 #include "logger/loggertypedelegate.h"
 
 #define _MYNAME                 QString(this->metaObject()->className())+":: "
+#define GLOBAL_logger           _LOGGER->globalInstance()
 
 class Logger : public QObject
 {
@@ -54,18 +55,21 @@ public:
 
     static Logger* globalInstance();
     void init();
+    bool isInitialized();
     void setVerboseLevel(int level);
 
 signals:
-    void logoutput(QString logtext, LOG_TYPE type);
+    void logoutput(QDateTime time, QString logtext, LOG_TYPE type);
 
 public slots:
     void add(QString logtext, LOG_TYPE type);
 
 private slots:
-    void internal_add(QString logtext, LOG_TYPE type);
+    void internalAdd(QDateTime time, QString logtext, LOG_TYPE type);
 
 private:
+    void consoleLog(QDateTime time, QString logtext, LOG_TYPE type);
+
     bool                initialized;
     int                 verbose_level;
 };

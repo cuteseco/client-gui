@@ -57,39 +57,73 @@ Logger::~Logger()
 
 void Logger::init()
 {
-    if (initialized)
+    if (GLOBAL_logger->isInitialized() || initialized)
         return;
 
-    connect(_LOGGER->globalInstance(), SIGNAL(logoutput(QString,LOG_TYPE)),
-            _LOGGER->globalInstance(), SLOT(internal_add(QString,LOG_TYPE)));
+    connect(GLOBAL_logger, SIGNAL(logoutput(QDateTime,QString,LOG_TYPE)),
+            GLOBAL_logger, SLOT(internalAdd(QDateTime,QString,LOG_TYPE)));
+
+    consoleLog(QDateTime::currentDateTime(),
+               "--- Log system started ---",
+               LOG_INFO
+               );
 
     initialized = true;
 }
 
+bool Logger::isInitialized()
+{
+    return initialized;
+}
+
 void Logger::setVerboseLevel(int level)
 {
+    if (!initialized)
+        init();
+
     verbose_level = level;
 }
 
 void Logger::add(QString logtext, LOG_TYPE type)
 {
-    init();
+    if (!initialized)
+        init();
 
-    emit logoutput(logtext, type);
+    emit logoutput(QDateTime::currentDateTime(),logtext,type);
 }
 
-void Logger::internal_add(QString logtext, LOG_TYPE type)
+void Logger::internalAdd(QDateTime time, QString logtext, LOG_TYPE type)
 {
-    init();
+    if (!initialized)
+        init();
 
     if (type > verbose_level)
         return;
 
-    QTextStream(stderr)
-            << QDateTime::currentDateTime().toString("dd.MM.yyyy HH:mm:ss")
-            << " "
-            << LoggerTypeDelegate::type2string(type)
-            << " "
-            << logtext
-            << endl;
+    consoleLog(time, logtext, type);
+
+}
+
+void Logger::consoleLog(QDateTime time, QString logtext, LOG_TYPE type)
+{
+    QString logline = QString("%1 %2 %3")
+            .arg(time.toString("dd.MM.yyyy HH:mm:ss.zzz"))
+            .arg(LoggerTypeDelegate::type2string(type))
+            .arg(logtext);
+
+    switch(type)
+    {
+    case LOG_SECURITYERROR:
+    case LOG_ERROR:
+    case LOG_WARNING:
+        QTextStream(stderr) << logline << endl;
+        break;
+
+    case LOG_SECURITYINFO:
+    case LOG_INFO:
+    case LOG_DEBUGINFO:
+    case LOG_DEBUGDETAILINFO:
+        QTextStream(stdout) << logline << endl;
+        break;
+    }
 }

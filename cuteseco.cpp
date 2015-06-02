@@ -58,3 +58,13 @@ void CuteSeCo::on_action_About_triggered()
 {
     aboutDialog->show();
 }
+
+void CuteSeCo::on_action_Deutsch_triggered()
+{
+    // de
+}
+
+void CuteSeCo::on_action_English_triggered()
+{
+    // en
+}

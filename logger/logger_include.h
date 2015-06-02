@@ -44,13 +44,13 @@
 #define LOG_DEBUGDETAILINFO_COLOR    QColor(Qt::green)
 
 enum LOG_TYPES {
-    LOG_SECURITYERROR,
-    LOG_ERROR,
-    LOG_WARNING,
-    LOG_SECURITYINFO,
-    LOG_INFO,
-    LOG_DEBUGINFO,
-    LOG_DEBUGDETAILINFO
+    LOG_SECURITYERROR,              /* security-related errors */
+    LOG_ERROR,                      /* runtime errors */
+    LOG_WARNING,                    /* this should not happen */
+    LOG_SECURITYINFO,               /* security-related information */
+    LOG_INFO,                       /* runtime information */
+    LOG_DEBUGINFO,                  /* debug information */
+    LOG_DEBUGDETAILINFO             /* very detailed debug information */
 };
 typedef enum LOG_TYPES LOG_TYPE;
 

@@ -45,7 +45,7 @@
 #include <unistd.h>
 #endif
 
-#include "buildno.h"
+//#include "buildno.h"
 #include "logger/logger.h"
 
 // proxy
@@ -65,40 +65,46 @@
 
 // OS
 #if defined(Q_OS_LINUX)
-    #define _OS_TYPE            QString("GNU/Linux")
-    #define _USERDEVICE         QString("pc")
+    #define _OS_TYPE                    QString("GNU/Linux")
+    #define _USERDEVICE                 QString("pc")
 #elif defined(Q_OS_ANDROID)
-    #define _OS_TYPE            QString("Android")
-    #define _USERDEVICE         QString("mobile")
+    #define _OS_TYPE                    QString("Android")
+    #define _USERDEVICE                 QString("mobile")
 #elif defined(Q_OS_OSX)
-    #define _OS_TYPE            QString("OS_X")
-    #define _USERDEVICE         QString("mac")
+    #define _OS_TYPE                    QString("OS_X")
+    #define _USERDEVICE                 QString("mac")
 #elif defined(Q_OS_IOS)
-    #define _OS_TYPE            QString("iOS")
-    #define _USERDEVICE         QString("mobile")
+    #define _OS_TYPE                    QString("iOS")
+    #define _USERDEVICE                 QString("mobile")
 #elif defined(Q_OS_FREEBSD_KERNEL)
-    #define _OS_TYPE            QString("Free BSD")
-    #define _USERDEVICE         QString("pc")
+    #define _OS_TYPE                    QString("Free BSD")
+    #define _USERDEVICE                 QString("pc")
 #elif defined(Q_OS_WIN32)
-    #define _OS_TYPE            QString("Windows")
-    #define _USERDEVICE         QString("pc")
+    #define _OS_TYPE                    QString("Windows")
+    #define _USERDEVICE                 QString("pc")
 #elif defined(Q_OS_WINRT)
-    #define _OS_TYPE            QString("Windows RT")
-    #define _USERDEVICE         QString("mobile")
+    #define _OS_TYPE                    QString("Windows RT")
+    #define _USERDEVICE                 QString("mobile")
 #elif defined(Q_OS_WINPHONE)
-    #define _OS_TYPE            QString("Windows Phone")
-    #define _USERDEVICE         QString("mobile")
+    #define _OS_TYPE                    QString("Windows Phone")
+    #define _USERDEVICE                 QString("mobile")
 #else
-    #define _OS_TYPE            QString("unknown")
-    #define _USERDEVICE         QString("unknown")
+    #define _OS_TYPE                    QString("unknown")
+    #define _USERDEVICE                 QString("unknown")
 #endif
 
 // ARCHITECTURE
 #if defined(Q_PROCESSOR_X86_64)
-    #define _ARCHITECTURE       QString("x86_64")
+    #define _ARCHITECTURE               QString("x86_64")
 #elif defined(Q_PROCESSOR_X86_32)
-    #define _ARCHITECTURE       QString("x86_32")
+    #define _ARCHITECTURE               QString("x86_32")
 #endif
+
+
+// shortcuts
+#define KS_QUIT                         QKeySequence(Qt::CTRL + Qt::Key_Q)
+#define KS_HELP                         QKeySequence::HelpContents
+#define KS_SETTINGS                     QKeySequence(Qt::Key_F2)
 
 class Config : public QObject
 {
@@ -109,7 +115,7 @@ public:
     ~Config();
 
     static bool             USE_TRAYICON;
-    static int              DEBUG_LEVEL;
+    static int              LOG_LEVEL;
     static QTranslator      *TRANSLATOR_QT;
     static QTranslator      *TRANSLATOR_APP;
 

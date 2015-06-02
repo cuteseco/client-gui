@@ -120,6 +120,7 @@ win32:GIT_VERSION = $$system($${GIT_CMD} 2> NUL)
 # export definitions
 DEFINES += PROJECT_PROGNAME="'\"$${TARGET}\"'"
 DEFINES += PROJECT_VERSION="'\"$${VERSION}\"'"
+DEFINES += PROJECT_BUILDNO="'\"$${BUILDNO}\"'"
 DEFINES += PROJECT_GIT_VERSION="'\"$${GIT_VERSION}\"'"
 DEFINES += PROJECT_STATE="'\"$${STATE}\"'"
 message("$${TARGET}    "\
@@ -135,6 +136,8 @@ message("$${TARGET}    "\
 increment-buildno.commands = @echo INFO: incrementing build no $${CONCAT}
 unix:increment-buildno.commands += \
     $${PWD}/SCRIPTS/increment-buildno $${PWD}/buildno $${CONCAT}
+win32:increment-buildno.commands += \
+    $${PWD}/SCRIPTS/increment-buildno.bat $${PWD}/buildno $${CONCAT}
 PRE_TARGETDEPS += increment-buildno
 QMAKE_EXTRA_TARGETS += increment-buildno
 
@@ -157,7 +160,9 @@ copytranslations.commands = @echo INFO: copying translations $${CONCAT}
 win32:copytranslations.commands += \
     $(COPY_DIR) \"$${PWD}/translations\" \"$${DESTDIR}/translations\"
 macx:copytranslations.commands  += \
-    $(COPY_DIR) \"$${PWD}/translations\" \"$${DESTDIR}/$${TARGET}.app/Contents/MacOS/\"
+    $(COPY_DIR) \
+    \"$${PWD}/translations\" \
+    \"$${DESTDIR}/$${TARGET}.app/Contents/MacOS/\"
 export(copytranslations.commands)
 first.depends += copytranslations
 QMAKE_EXTRA_TARGETS += copytranslations
@@ -173,7 +178,9 @@ unix:!macx {
 }
 macx: {
     stripunneeded.commands += \
-        dsymutil $${TARGET}.app/Contents/MacOS/$${TARGET} -o $${TARGET}.app.dSYM $${CONCAT}
+        dsymutil \
+        $${TARGET}.app/Contents/MacOS/$${TARGET} \
+        -o $${TARGET}.app.dSYM $${CONCAT}
 }
 win32: {
     # do nothing, be fat
@@ -213,7 +220,8 @@ macx: {
 
     QMAKE_CFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
     QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO
-    QMAKE_OBJECTIVE_CFLAGS_RELEASE = $$QMAKE_OBJECTIVE_CFLAGS_RELEASE_WITH_DEBUGINFO
+    QMAKE_OBJECTIVE_CFLAGS_RELEASE = \
+        $$QMAKE_OBJECTIVE_CFLAGS_RELEASE_WITH_DEBUGINFO
     QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO
 }
 
@@ -274,4 +282,6 @@ OTHER_FILES += \
     $${PROGNAME}.sh \
     $${PROGNAME}Developer.desktop \
     $${PROGNAME}Developer.rc \
-    $${PROGNAME}Developer.sh
+    $${PROGNAME}Developer.sh \
+    SCRIPTS/increment-buildno.bat \
+    SCRIPTS/increment-buildno

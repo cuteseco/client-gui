@@ -54,6 +54,8 @@ public:
 private slots:
     void on_action_Quit_triggered();
     void on_action_About_triggered();
+    void on_action_Deutsch_triggered();
+    void on_action_English_triggered();
 
 private:
     Ui::CuteSeCo *ui;

@@ -34,7 +34,6 @@
 
 #include "cuteseco.h"
 #include <QApplication>
-#include <QTranslator>
 
 #include "config/config.h"
 #include "logger/logger.h"
@@ -43,8 +42,8 @@ Q_GLOBAL_STATIC(Logger, _LOGGER)
 
 void log(QString logtext, LOG_TYPE type)
 {
-    if (_LOGGER->globalInstance())
-        _LOGGER->globalInstance()->add("main:: "+logtext, type);
+    if (GLOBAL_logger)
+        GLOBAL_logger->add("main:: "+logtext, type);
 }
 
 int main(int argc, char *argv[])
@@ -53,14 +52,14 @@ int main(int argc, char *argv[])
 
     // debug level
 #if defined(PROJECT_DEVELOPERMODE)
-    Config::DEBUG_LEVEL = 6;
+    Config::LOG_LEVEL = LOG_DEBUGDETAILINFO;
 #else
-    Config::DEBUG_LEVEL = 0;
+    Config::LOG_LEVEL = LOG_ERROR;
 #endif
-    _LOGGER->globalInstance()->setVerboseLevel(Config::DEBUG_LEVEL);
+    GLOBAL_logger->setVerboseLevel(Config::LOG_LEVEL);
 
     log(QString("%1 is starting.").arg(PROJECT_PROGNAME),
-        LOG_DEBUGINFO);
+        LOG_DEBUGDETAILINFO);
 
     CuteSeCo w;
     w.show();

@@ -39,7 +39,7 @@
 
 QNetworkProxy Config::my_proxy;
 bool Config::USE_TRAYICON=true;
-int Config::DEBUG_LEVEL=0;
+int Config::LOG_LEVEL=0;
 QTranslator* Config::TRANSLATOR_QT=NULL;
 QTranslator* Config::TRANSLATOR_APP=NULL;
 
@@ -57,7 +57,7 @@ Config::~Config()
  */
 void Config::log(QString logtext, LOG_TYPE type)
 {
-    if (type > Config::DEBUG_LEVEL)
+    if (type > Config::LOG_LEVEL)
         return;
 
     QTextStream(stderr)

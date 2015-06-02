@@ -39,7 +39,15 @@
     </property>
     <addaction name="action_About"/>
    </widget>
+   <widget class="QMenu" name="menu_Language">
+    <property name="title">
+     <string>&amp;Language</string>
+    </property>
+    <addaction name="action_Deutsch"/>
+    <addaction name="action_English"/>
+   </widget>
    <addaction name="menu_Actions"/>
+   <addaction name="menu_Language"/>
    <addaction name="menu_Help"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -67,6 +75,16 @@
    </property>
    <property name="text">
     <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="action_Deutsch">
+   <property name="text">
+    <string>&amp;Deutsch</string>
+   </property>
+  </action>
+  <action name="action_English">
+   <property name="text">
+    <string>&amp;English</string>
    </property>
   </action>
  </widget>
