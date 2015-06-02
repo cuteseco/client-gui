@@ -270,6 +270,9 @@ message(+development mode)
 CODECFORTR = UTF-8
 CODECFORSRC = UTF-8
 
+TRANSLATIONS = \
+    LANG/lang_de.ts
+
 OTHER_FILES += \
     buildno \
     CHANGELOG.txt \

@@ -42,6 +42,9 @@ CuteSeCo::CuteSeCo(QWidget *parent) :
     ui->setupUi(this);
 
     aboutDialog = new AboutDialog();
+
+    ui->action_Quit->setShortcut(KS_QUIT);
+    ui->action_About->setShortcut(KS_HELP);
 }
 
 CuteSeCo::~CuteSeCo()

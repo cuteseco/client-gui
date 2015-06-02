@@ -10,5 +10,6 @@
         <file>images/info.svg</file>
         <file>images/switch.svg</file>
         <file>images/wrench.svg</file>
+        <file>translations/lang_de.qm</file>
     </qresource>
 </RCC>

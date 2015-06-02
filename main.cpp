@@ -48,7 +48,24 @@ void log(QString logtext, LOG_TYPE type)
 
 int main(int argc, char *argv[])
 {
+    QCoreApplication::setOrganizationName("Christian Höne");
+    QCoreApplication::setOrganizationDomain("cuteseco.org");
+    QCoreApplication::setApplicationName(PROJECT_PROGNAME);
+    QCoreApplication::setApplicationVersion(PROJECT_VERSION);
+
     QApplication a(argc, argv);
+
+    QTranslator qtTranslator;
+    Config::TRANSLATOR_QT = &qtTranslator;
+    qtTranslator.load("qt_" + QLocale::system().name(),
+                      QLibraryInfo::location(QLibraryInfo::TranslationsPath)
+                      );
+    a.installTranslator(&qtTranslator);
+
+    QTranslator appTranslator;
+    Config::TRANSLATOR_APP = &appTranslator;
+    appTranslator.load(":/translations/lang_" + QLocale::system().name());
+    a.installTranslator(&appTranslator);
 
     // debug level
 #if defined(PROJECT_DEVELOPERMODE)
