@@ -60,13 +60,7 @@ void Config::log(QString logtext, LOG_TYPE type)
     if (type > Config::LOG_LEVEL)
         return;
 
-    QTextStream(stderr)
-            << QDateTime::currentDateTime().toString("dd.MM.yyyy HH:mm:ss")
-            << " "
-            << LoggerTypeDelegate::type2string(type)
-            << " "
-            << _MYNAME+logtext
-            << endl;
+    Logger::consoleLog(QDateTime::currentDateTime(), _MYNAME+logtext, type);
 }
 
 QString Config::getFullProgName()
@@ -78,6 +72,44 @@ QString Config::getFullProgName()
             .arg(_ARCHITECTURE)
             .arg(_OS_TYPE)
             .arg(PROJECT_STATE);
+}
+
+QIcon Config::getProgIcon()
+{
+    return QIcon(QString(":/images/logos/%1_logo.svg").arg(PROJECT_PROGNAME));
+}
+
+void Config::loadLanguage(QString language)
+{
+    QLocale locale(language);
+    QLocale::setDefault(locale);
+
+    QString languageName = QLocale::languageToString(locale.language());
+    bool    qtOK  = true,
+            appOK = true;
+
+    qApp->removeTranslator(Config::TRANSLATOR_QT);
+    qApp->removeTranslator(Config::TRANSLATOR_APP);
+    if (language != "en")
+    {
+        qtOK = Config::TRANSLATOR_QT->load(
+                    "qt_"+language,
+                    QLibraryInfo::location(QLibraryInfo::TranslationsPath)
+                    );
+
+        if (qtOK)
+            qApp->installTranslator(Config::TRANSLATOR_QT);
+
+        appOK = Config::TRANSLATOR_APP->load(":/translations/lang_"+language);
+
+        if (appOK)
+            qApp->installTranslator(Config::TRANSLATOR_APP);
+    }
+
+    if (qtOK && appOK)
+        log(QString("switched to language: %1").arg(languageName), LOG_INFO);
+    else
+        log(QString("error loading language: %1").arg(languageName), LOG_ERROR);
 }
 
 // proxy

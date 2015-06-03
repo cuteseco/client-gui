@@ -43,6 +43,10 @@ CuteSeCo::CuteSeCo(QWidget *parent) :
 
     aboutDialog = new AboutDialog();
 
+    setWindowIcon(Config::getProgIcon());
+
+    createLanguageMenu();
+
     ui->action_Quit->setShortcut(KS_QUIT);
     ui->action_About->setShortcut(KS_HELP);
 }
@@ -50,6 +54,22 @@ CuteSeCo::CuteSeCo(QWidget *parent) :
 CuteSeCo::~CuteSeCo()
 {
     delete ui;
+}
+
+void CuteSeCo::changeEvent(QEvent *event)
+{
+    switch(event->type())
+    {
+    case QEvent::LanguageChange:
+        ui->retranslateUi(this);
+        break;
+    case QEvent::LocaleChange:
+        Config::loadLanguage(QLocale::system().name());
+        break;
+    default:
+        break;
+    }
+    QMainWindow::changeEvent(event);
 }
 
 void CuteSeCo::on_action_Quit_triggered()
@@ -62,12 +82,43 @@ void CuteSeCo::on_action_About_triggered()
     aboutDialog->show();
 }
 
-void CuteSeCo::on_action_Deutsch_triggered()
+void CuteSeCo::createLanguageMenu()
 {
-    // de
+    QActionGroup *languageSelectionGroup = new QActionGroup(ui->menu_Language);
+    languageSelectionGroup->setExclusive(true);
+
+    connect(languageSelectionGroup, SIGNAL(triggered(QAction*)),
+            this, SLOT(languageChangedEvent(QAction*)));
+
+    QString defaultLocale = Config::getLocale();
+
+    QDir translationDir(":/translations");
+    QStringList fileNames = translationDir.entryList(QStringList("*.qm"),
+                                                     QDir::Files,
+                                                     QDir::Name
+                                                     );
+
+    for (int i=0; i < fileNames.size(); i++)
+    {
+        QString locale = fileNames[i];
+        locale.truncate(locale.lastIndexOf('.'));
+        locale.remove(0, locale.indexOf('_')+1);
+
+        QAction *action = new QAction(
+                    QLocale::languageToString(QLocale(locale).language()),
+                    this
+                    );
+        action->setCheckable(true);
+        action->setData(locale);
+
+        ui->menu_Language->addAction(action);
+        languageSelectionGroup->addAction(action);
+        if (locale == defaultLocale)
+            action->setChecked(true);
+    }
 }
 
-void CuteSeCo::on_action_English_triggered()
+void CuteSeCo::languageChangedEvent(QAction *action)
 {
-    // en
+    Config::loadLanguage(action->data().toString());
 }

@@ -58,6 +58,8 @@ public:
     bool isInitialized();
     void setVerboseLevel(int level);
 
+    static void consoleLog(QDateTime time, QString logtext, LOG_TYPE type);
+
 signals:
     void logoutput(QDateTime time, QString logtext, LOG_TYPE type);
 
@@ -68,8 +70,6 @@ private slots:
     void internalAdd(QDateTime time, QString logtext, LOG_TYPE type);
 
 private:
-    void consoleLog(QDateTime time, QString logtext, LOG_TYPE type);
-
     bool                initialized;
     int                 verbose_level;
 };

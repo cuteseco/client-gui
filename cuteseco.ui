@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string>CuteSeCo</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="resource.qrc">
-    <normaloff>:/images/logos/CuteSeCo_logo.svg</normaloff>:/images/logos/CuteSeCo_logo.svg</iconset>
-  </property>
   <widget class="QWidget" name="centralWidget"/>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -43,8 +39,6 @@
     <property name="title">
      <string>&amp;Language</string>
     </property>
-    <addaction name="action_Deutsch"/>
-    <addaction name="action_English"/>
    </widget>
    <addaction name="menu_Actions"/>
    <addaction name="menu_Language"/>

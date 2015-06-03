@@ -41,13 +41,13 @@ AboutDialog::AboutDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setWindowTitle(tr("About %1").arg(PROJECT_PROGNAME));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
-    ui->l_version->setText(Config::getFullProgName());
+    ui->l_project_logo->setPixmap(Config::getProgIcon().pixmap(48,48));
     ui->tBrowser_about->viewport()->setAutoFillBackground(false);
     ui->tBrowser_license->viewport()->setAutoFillBackground(false);
 
+    updateLabels();
     loadingHtmlContent();
 }
 
@@ -61,16 +61,24 @@ void AboutDialog::changeEvent(QEvent *event)
     if (event->type() == QEvent::LanguageChange)
     {
         ui->retranslateUi(this);
+        updateLabels();
         loadingHtmlContent();
     }
     QDialog::changeEvent(event);
+}
+
+void AboutDialog::updateLabels()
+{
+    setWindowTitle(tr("About %1").arg(PROJECT_PROGNAME));
+    ui->l_version->setText(Config::getFullProgName());
 }
 
 /* loading html content
  */
 void AboutDialog::loadingHtmlContent()
 {
-    QString fileName(":/about/about_de.html");
+    QString fileName =
+            QString(":/about/about_%1.html").arg(Config::getLocale());
 
     QFileInfo fileInfo(fileName);
 
@@ -94,7 +102,6 @@ void AboutDialog::loadingHtmlContent()
         ui->tBrowser_license->setText(istream.readAll());
         license_file.close();
     }
-
 }
 
 void AboutDialog::on_pB_qt_clicked()

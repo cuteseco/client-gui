@@ -55,25 +55,23 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    QTranslator qtTranslator;
-    Config::TRANSLATOR_QT = &qtTranslator;
-    qtTranslator.load("qt_" + QLocale::system().name(),
-                      QLibraryInfo::location(QLibraryInfo::TranslationsPath)
-                      );
-    a.installTranslator(&qtTranslator);
-
-    QTranslator appTranslator;
-    Config::TRANSLATOR_APP = &appTranslator;
-    appTranslator.load(":/translations/lang_" + QLocale::system().name());
-    a.installTranslator(&appTranslator);
-
-    // debug level
+    // logging and log level
 #if defined(PROJECT_DEVELOPERMODE)
     Config::LOG_LEVEL = LOG_DEBUGDETAILINFO;
 #else
     Config::LOG_LEVEL = LOG_ERROR;
 #endif
     GLOBAL_logger->setVerboseLevel(Config::LOG_LEVEL);
+
+    QTranslator qtTranslator, appTranslator;
+    Config::TRANSLATOR_QT = &qtTranslator;
+    Config::TRANSLATOR_APP = &appTranslator;
+
+    Config::loadLanguage(QLocale::system().name());
+
+    a.installTranslator(&qtTranslator);
+    a.installTranslator(&appTranslator);
+
 
     log(QString("%1 is starting.").arg(PROJECT_PROGNAME),
         LOG_DEBUGDETAILINFO);

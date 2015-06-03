@@ -123,6 +123,9 @@ public:
     static void log(QString logtext, LOG_TYPE type);
 
     static QString getFullProgName();
+    static QIcon getProgIcon();
+    static void loadLanguage(QString language);
+
 
     // proxy
     QNetworkProxy loadProxy();

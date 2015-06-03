@@ -12,7 +12,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../resource.qrc">
-    <normaloff>:/images/logos/CuteSeCo_logo.svg</normaloff>:/images/logos/CuteSeCo_logo.svg</iconset>
+    <normaloff>:/images/info.svg</normaloff>:/images/info.svg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -347,9 +347,6 @@
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QLabel" name="l_version">
-       <property name="text">
-        <string/>
-       </property>
        <property name="textInteractionFlags">
         <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
        </property>

@@ -271,6 +271,7 @@ CODECFORTR = UTF-8
 CODECFORSRC = UTF-8
 
 TRANSLATIONS = \
+    LANG/lang_en.ts
     LANG/lang_de.ts
 
 OTHER_FILES += \

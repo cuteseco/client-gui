@@ -51,14 +51,19 @@ public:
     explicit CuteSeCo(QWidget *parent = 0);
     ~CuteSeCo();
 
+protected:
+    void changeEvent(QEvent *event);
+
 private slots:
+    void languageChangedEvent(QAction *action);
+
     void on_action_Quit_triggered();
     void on_action_About_triggered();
-    void on_action_Deutsch_triggered();
-    void on_action_English_triggered();
 
 private:
     Ui::CuteSeCo *ui;
+
+    void createLanguageMenu(void);
 
     // Dialogs
     AboutDialog     *aboutDialog;
