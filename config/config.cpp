@@ -42,6 +42,7 @@ bool Config::USE_TRAYICON=true;
 int Config::LOG_LEVEL=0;
 QTranslator* Config::TRANSLATOR_QT=NULL;
 QTranslator* Config::TRANSLATOR_APP=NULL;
+QString Config::activeLanguage = "";
 
 Config::Config(QObject *parent) :
     QObject(parent)
@@ -106,10 +107,17 @@ void Config::loadLanguage(QString language)
             qApp->installTranslator(Config::TRANSLATOR_APP);
     }
 
+    activeLanguage = language;
+
     if (qtOK && appOK)
         log(QString("switched to language: %1").arg(languageName), LOG_INFO);
     else
         log(QString("error loading language: %1").arg(languageName), LOG_ERROR);
+}
+
+QString Config::getLanguage()
+{
+    return activeLanguage;
 }
 
 // proxy
@@ -311,9 +319,9 @@ QString Config::getSettingsPath()
     return settings.fileName();
 }
 
-QString Config::getLocale()
+QString Config::getSystemLocale()
 {
-    log("getLocale()", LOG_DEBUGDETAILINFO);
+    log("getSystemLocale()", LOG_DEBUGDETAILINFO);
 
     QString defaultLocale = QLocale::system().name();
     int pos = defaultLocale.lastIndexOf('_');

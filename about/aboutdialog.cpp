@@ -78,7 +78,7 @@ void AboutDialog::updateLabels()
 void AboutDialog::loadingHtmlContent()
 {
     QString fileName =
-            QString(":/about/about_%1.html").arg(Config::getLocale());
+            QString(":/about/about_%1.html").arg(Config::getLanguage());
 
     QFileInfo fileInfo(fileName);
 

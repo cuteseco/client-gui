@@ -90,7 +90,7 @@ void CuteSeCo::createLanguageMenu()
     connect(languageSelectionGroup, SIGNAL(triggered(QAction*)),
             this, SLOT(languageChangedEvent(QAction*)));
 
-    QString defaultLocale = Config::getLocale();
+    QString defaultLocale = Config::getSystemLocale();
 
     QDir translationDir(":/translations");
     QStringList fileNames = translationDir.entryList(QStringList("*.qm"),
@@ -104,7 +104,10 @@ void CuteSeCo::createLanguageMenu()
         locale.truncate(locale.lastIndexOf('.'));
         locale.remove(0, locale.indexOf('_')+1);
 
+        QIcon icon(":/images/flags/"+locale+".png");
+
         QAction *action = new QAction(
+                    icon,
                     QLocale::languageToString(QLocale(locale).language()),
                     this
                     );

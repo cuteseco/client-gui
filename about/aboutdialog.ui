@@ -12,7 +12,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../resource.qrc">
-    <normaloff>:/images/info.svg</normaloff>:/images/info.svg</iconset>
+    <normaloff>:/images/icomoon/info.svg</normaloff>:/images/icomoon/info.svg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>

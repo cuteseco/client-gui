@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
     Config::TRANSLATOR_QT = &qtTranslator;
     Config::TRANSLATOR_APP = &appTranslator;
 
-    Config::loadLanguage(QLocale::system().name());
+    Config::loadLanguage(Config::getSystemLocale());
 
     a.installTranslator(&qtTranslator);
     a.installTranslator(&appTranslator);

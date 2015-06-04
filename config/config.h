@@ -125,6 +125,7 @@ public:
     static QString getFullProgName();
     static QIcon getProgIcon();
     static void loadLanguage(QString language);
+    static QString getLanguage();
 
 
     // proxy
@@ -143,7 +144,7 @@ public:
     QString getSettingsPath();
 
     // host specific
-    static QString getLocale();
+    static QString getSystemLocale();
     static QString getOSType();
     static QString getArchitecture();
     static QString getOSName();
@@ -157,6 +158,7 @@ private:
     QSettings               settings;
 
     static QNetworkProxy    my_proxy;
+    static QString          activeLanguage;
 };
 
 #endif // CONFIG_H
