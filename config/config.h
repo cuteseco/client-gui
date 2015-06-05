@@ -40,6 +40,7 @@
 #include <QStandardPaths>
 #include <QtNetwork>
 #include <QTranslator>
+#include <QIcon>
 
 #ifdef Q_OS_LINUX
 #include <unistd.h>
@@ -115,7 +116,6 @@ public:
     ~Config();
 
     static bool             USE_TRAYICON;
-    static int              LOG_LEVEL;
     static QTranslator      *TRANSLATOR_QT;
     static QTranslator      *TRANSLATOR_APP;
 

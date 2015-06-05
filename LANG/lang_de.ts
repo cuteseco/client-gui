@@ -82,12 +82,12 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../about/aboutdialog.cpp" line="44"/>
+        <location filename="../about/aboutdialog.cpp" line="81"/>
         <source>About %1</source>
         <translation>Über %1</translation>
     </message>
     <message>
-        <location filename="../about/aboutdialog.cpp" line="102"/>
+        <location filename="../about/aboutdialog.cpp" line="122"/>
         <source>%1 uses Qt</source>
         <translation>%1 verwendet Qt</translation>
     </message>
@@ -100,37 +100,37 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../cuteseco.ui" line="32"/>
+        <location filename="../cuteseco.ui" line="28"/>
         <source>&amp;Actions</source>
         <translation>&amp;Aktionen</translation>
     </message>
     <message>
-        <location filename="../cuteseco.ui" line="38"/>
+        <location filename="../cuteseco.ui" line="34"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../cuteseco.ui" line="44"/>
+        <location filename="../cuteseco.ui" line="40"/>
         <source>&amp;Language</source>
         <translation>&amp;Sprache</translation>
     </message>
     <message>
-        <location filename="../cuteseco.ui" line="68"/>
+        <location filename="../cuteseco.ui" line="62"/>
         <source>&amp;Quit</source>
         <translation>&amp;Beenden</translation>
     </message>
     <message>
-        <location filename="../cuteseco.ui" line="77"/>
+        <location filename="../cuteseco.ui" line="71"/>
         <source>&amp;About</source>
         <translation>Ü&amp;ber</translation>
     </message>
     <message>
-        <location filename="../cuteseco.ui" line="82"/>
+        <location filename="../cuteseco.ui" line="76"/>
         <source>&amp;Deutsch</source>
         <translation>&amp;Deutsch</translation>
     </message>
     <message>
-        <location filename="../cuteseco.ui" line="87"/>
+        <location filename="../cuteseco.ui" line="81"/>
         <source>&amp;English</source>
         <translation>&amp;English</translation>
     </message>
@@ -170,6 +170,41 @@
     <message>
         <location filename="../logger/loggertypedelegate.cpp" line="56"/>
         <source> SECURITY!  </source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="65"/>
+        <source>debug detail info</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="66"/>
+        <source>debug info</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="67"/>
+        <source>info</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="68"/>
+        <source>warning</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="69"/>
+        <source>error</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="70"/>
+        <source>security info</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="71"/>
+        <source>security alert</source>
         <translation></translation>
     </message>
 </context>

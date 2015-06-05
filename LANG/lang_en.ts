@@ -82,12 +82,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../about/aboutdialog.cpp" line="44"/>
+        <location filename="../about/aboutdialog.cpp" line="81"/>
         <source>About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../about/aboutdialog.cpp" line="103"/>
+        <location filename="../about/aboutdialog.cpp" line="122"/>
         <source>%1 uses Qt</source>
         <translation type="unfinished"></translation>
     </message>
@@ -170,6 +170,41 @@
     <message>
         <location filename="../logger/loggertypedelegate.cpp" line="56"/>
         <source> SECURITY!  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="65"/>
+        <source>debug detail info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="66"/>
+        <source>debug info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="67"/>
+        <source>info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="68"/>
+        <source>warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="69"/>
+        <source>error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="70"/>
+        <source>security info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../logger/loggertypedelegate.cpp" line="71"/>
+        <source>security alert</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

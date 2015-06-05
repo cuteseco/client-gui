@@ -39,11 +39,38 @@
 #include <QTextStream>
 #include <QDateTime>
 
-#include "logger/logger_include.h"
-#include "logger/loggertypedelegate.h"
-
-#define _MYNAME                 QString(this->metaObject()->className())+":: "
 #define GLOBAL_logger           _LOGGER->globalInstance()
+#define LOG_DEFAULTLOGPROXY     \
+    if (GLOBAL_logger) GLOBAL_logger->append(LOG_CLASSNAME+logtext, type);
+#define LOG_CLASSNAME           QString(this->metaObject()->className())+":: "
+
+#if defined(PROJECT_DEVELOPERMODE)
+#define LOG_CALL                log(Q_FUNC_INFO, LOG_DEBUGDETAILINFO);
+#else
+#define LOG_CALL
+#endif
+
+
+#define LOG_SECURITYERROR_COLOR      QColor(Qt::red)
+#define LOG_ERROR_COLOR              QColor(Qt::red)
+#define LOG_WARNING_COLOR            QColor(Qt::yellow)
+#define LOG_SECURITYINFO_COLOR       QColor(Qt::green)
+#define LOG_INFO_COLOR               QColor(Qt::green)
+#define LOG_DEBUGINFO_COLOR          QColor(Qt::green)
+#define LOG_DEBUGDETAILINFO_COLOR    QColor(Qt::green)
+
+enum LOG_TYPES {
+    LOG_SECURITYERROR,              /* security-related errors/alerts */
+    LOG_ERROR,                      /* runtime errors */
+    LOG_WARNING,                    /* this should not happen */
+    LOG_SECURITYINFO,               /* security-related information */
+    LOG_INFO,                       /* runtime information */
+    LOG_DEBUGINFO,                  /* debug information */
+    LOG_DEBUGDETAILINFO             /* very detailed debug information */
+};
+typedef enum LOG_TYPES LOG_TYPE;
+
+Q_DECLARE_METATYPE(LOG_TYPE);
 
 class Logger : public QObject
 {
@@ -54,9 +81,13 @@ public:
     ~Logger();
 
     static Logger* globalInstance();
+    static QString type2string(LOG_TYPE type);
+    static QString type2description(LOG_TYPE type);
+
     void init();
     bool isInitialized();
-    void setVerboseLevel(int level);
+    void setLogLevel(LOG_TYPE level);
+    LOG_TYPE getLogLevel();
 
     static void consoleLog(QDateTime time, QString logtext, LOG_TYPE type);
 
@@ -64,14 +95,14 @@ signals:
     void logoutput(QDateTime time, QString logtext, LOG_TYPE type);
 
 public slots:
-    void add(QString logtext, LOG_TYPE type);
+    void append(QString logtext, LOG_TYPE type);
 
 private slots:
     void internalAdd(QDateTime time, QString logtext, LOG_TYPE type);
 
 private:
     bool                initialized;
-    int                 verbose_level;
+    LOG_TYPE            log_level;
 };
 
 #endif // LOGGER_H

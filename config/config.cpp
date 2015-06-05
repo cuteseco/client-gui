@@ -34,12 +34,13 @@
 
 #include "config.h"
 
-#undef _MYNAME
-#define _MYNAME QString("Config:: ")
+#undef LOG_CLASSNAME
+#define LOG_CLASSNAME QString("Config:: ")
+
+Q_GLOBAL_STATIC(Logger, _LOGGER)
 
 QNetworkProxy Config::my_proxy;
 bool Config::USE_TRAYICON=true;
-int Config::LOG_LEVEL=0;
 QTranslator* Config::TRANSLATOR_QT=NULL;
 QTranslator* Config::TRANSLATOR_APP=NULL;
 QString Config::activeLanguage = "";
@@ -58,10 +59,7 @@ Config::~Config()
  */
 void Config::log(QString logtext, LOG_TYPE type)
 {
-    if (type > Config::LOG_LEVEL)
-        return;
-
-    Logger::consoleLog(QDateTime::currentDateTime(), _MYNAME+logtext, type);
+    LOG_DEFAULTLOGPROXY
 }
 
 QString Config::getFullProgName()
@@ -82,6 +80,8 @@ QIcon Config::getProgIcon()
 
 void Config::loadLanguage(QString language)
 {
+    LOG_CALL
+
     QLocale locale(language);
     QLocale::setDefault(locale);
 
@@ -123,7 +123,7 @@ QString Config::getLanguage()
 // proxy
 QNetworkProxy Config::loadProxy()
 {
-    log("loadProxy()", LOG_DEBUGDETAILINFO);
+    LOG_CALL
 
     QNetworkProxy proxy;
 
@@ -182,7 +182,7 @@ QNetworkProxy Config::loadProxy()
 
 void Config::initProxy()
 {
-    log("initProxy()", LOG_DEBUGDETAILINFO);
+    LOG_CALL
 
     setProxy(loadProxy());
 }
@@ -251,7 +251,7 @@ QString Config::proxy2String(QNetworkProxy proxy)
 
 QString Config::getStoragePath()
 {
-    log("getStoragePath()", LOG_DEBUGDETAILINFO);
+    LOG_CALL
 
     QString storagePath =
             QStandardPaths::writableLocation(QStandardPaths::DataLocation);
@@ -263,7 +263,7 @@ QString Config::getStoragePath()
 
 QString Config::getDownloadPath()
 {
-    log("getDownloadPath()", LOG_DEBUGDETAILINFO);
+    LOG_CALL
 
     QString downloadPath =
             QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
@@ -276,7 +276,7 @@ QString Config::getDownloadPath()
 
 QString Config::getDocumentPath()
 {
-    log("getDocumentPath()", LOG_DEBUGDETAILINFO);
+    LOG_CALL
 
     QString documentPath =
             QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
@@ -289,7 +289,7 @@ QString Config::getDocumentPath()
 
 QString Config::getTempPath()
 {
-    log("getTempPath()", LOG_DEBUGDETAILINFO);
+    LOG_CALL
 
     QString tempPath =
             QStandardPaths::writableLocation(QStandardPaths::TempLocation);
@@ -302,7 +302,7 @@ QString Config::getTempPath()
 
 QString Config::getCachePath()
 {
-    log("getCachePath()", LOG_DEBUGDETAILINFO);
+    LOG_CALL
 
     QString cachePath =
             QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
@@ -314,14 +314,14 @@ QString Config::getCachePath()
 
 QString Config::getSettingsPath()
 {
-    log("getSettingsPath()", LOG_DEBUGDETAILINFO);
+    LOG_CALL
 
     return settings.fileName();
 }
 
 QString Config::getSystemLocale()
 {
-    log("getSystemLocale()", LOG_DEBUGDETAILINFO);
+    LOG_CALL
 
     QString defaultLocale = QLocale::system().name();
     int pos = defaultLocale.lastIndexOf('_');
@@ -342,6 +342,8 @@ QString Config::getArchitecture()
 
 QString Config::getOSName()
 {
+    LOG_CALL
+
     QString OS = "not supported";
 
 #if defined(Q_OS_LINUX)
@@ -465,6 +467,8 @@ QString Config::getOSName()
 
 bool Config::isAdministrator()
 {
+    LOG_CALL
+
 #if defined(Q_OS_LINUX)
     return (getuid() ? false : true);
 #elif defined(Q_OS_WIN32)

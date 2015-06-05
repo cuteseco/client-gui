@@ -63,6 +63,7 @@ private slots:
 private:
     Ui::CuteSeCo *ui;
 
+    void log(QString logtext, LOG_TYPE type);
     void createLanguageMenu(void);
 
     // Dialogs

@@ -43,7 +43,7 @@ Logger::Logger(QObject *parent) :
     QObject(parent)
 {
     initialized = false;
-    verbose_level = LOG_DEBUGDETAILINFO;
+    log_level = LOG_DEBUGDETAILINFO;
 }
 
 Logger* Logger::globalInstance()
@@ -53,6 +53,36 @@ Logger* Logger::globalInstance()
 
 Logger::~Logger()
 {
+}
+
+QString Logger::type2string(LOG_TYPE type)
+{
+    switch(type)
+    {
+    case LOG_DEBUGDETAILINFO:return tr("------------");
+    case LOG_DEBUGINFO:      return tr("   DEBUG    ");
+    case LOG_INFO:           return tr("   Info     ");
+    case LOG_WARNING:        return tr("  Warning   ");
+    case LOG_ERROR:          return tr("   Error    ");
+    case LOG_SECURITYINFO:   return tr("Securityinfo");
+    case LOG_SECURITYERROR:  return tr(" SECURITY!  ");
+    }
+    return "%%%%%";
+}
+
+QString Logger::type2description(LOG_TYPE type)
+{
+    switch(type)
+    {
+    case LOG_DEBUGDETAILINFO:return tr("debug detail info");
+    case LOG_DEBUGINFO:      return tr("debug info");
+    case LOG_INFO:           return tr("info");
+    case LOG_WARNING:        return tr("warning");
+    case LOG_ERROR:          return tr("error");
+    case LOG_SECURITYINFO:   return tr("security info");
+    case LOG_SECURITYERROR:  return tr("security alert");
+    }
+    return "%%%%%";
 }
 
 void Logger::init()
@@ -76,15 +106,34 @@ bool Logger::isInitialized()
     return initialized;
 }
 
-void Logger::setVerboseLevel(int level)
+void Logger::setLogLevel(LOG_TYPE level)
 {
     if (!initialized)
         init();
 
-    verbose_level = level;
+    log_level = level;
+
+    QString listLoglevel;
+    for (int i=0; i <= log_level; i++)
+        listLoglevel.append(QString("\t\t\"%1\": (%2) %3\n")
+                            .arg(type2string((LOG_TYPE)i))
+                            .arg(i)
+                            .arg(type2description((LOG_TYPE)i)));
+
+    consoleLog(QDateTime::currentDateTime(),
+               QString("log level is set to: (%1)\n%2")
+               .arg(log_level)
+               .arg(listLoglevel),
+               LOG_INFO
+               );
 }
 
-void Logger::add(QString logtext, LOG_TYPE type)
+LOG_TYPE Logger::getLogLevel()
+{
+    return log_level;
+}
+
+void Logger::append(QString logtext, LOG_TYPE type)
 {
     if (!initialized)
         init();
@@ -97,18 +146,17 @@ void Logger::internalAdd(QDateTime time, QString logtext, LOG_TYPE type)
     if (!initialized)
         init();
 
-    if (type > verbose_level)
+    if (type > log_level)
         return;
 
     consoleLog(time, logtext, type);
-
 }
 
 void Logger::consoleLog(QDateTime time, QString logtext, LOG_TYPE type)
 {
     QString logline = QString("%1 %2 %3")
             .arg(time.toString("dd.MM.yyyy HH:mm:ss.zzz"))
-            .arg(LoggerTypeDelegate::type2string(type))
+            .arg(type2string(type))
             .arg(logtext);
 
     switch(type)

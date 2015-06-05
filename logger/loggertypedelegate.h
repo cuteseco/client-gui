@@ -38,7 +38,7 @@
 #include <QStyledItemDelegate>
 #include <QPainter>
 
-#include "logger/logger_include.h"
+#include "logger/logger.h"
 
 class LoggerTypeDelegate : public QStyledItemDelegate
 {
@@ -52,8 +52,6 @@ public:
                const QStyleOptionViewItem &option,
                const QModelIndex &index
                ) const;
-
-    static QString type2string(int type);
 };
 
 #endif // LOGGERTYPEDELEGATE_H

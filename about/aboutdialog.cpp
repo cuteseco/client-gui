@@ -35,6 +35,8 @@
 #include "aboutdialog.h"
 #include "ui_aboutdialog.h"
 
+Q_GLOBAL_STATIC(Logger, _LOGGER)
+
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AboutDialog)
@@ -67,8 +69,15 @@ void AboutDialog::changeEvent(QEvent *event)
     QDialog::changeEvent(event);
 }
 
+void AboutDialog::log(QString logtext, LOG_TYPE type)
+{
+    LOG_DEFAULTLOGPROXY
+}
+
 void AboutDialog::updateLabels()
 {
+    LOG_CALL
+
     setWindowTitle(tr("About %1").arg(PROJECT_PROGNAME));
     ui->l_version->setText(Config::getFullProgName());
 }
@@ -77,6 +86,8 @@ void AboutDialog::updateLabels()
  */
 void AboutDialog::loadingHtmlContent()
 {
+    LOG_CALL
+
     QString fileName =
             QString(":/about/about_%1.html").arg(Config::getLanguage());
 
@@ -106,5 +117,7 @@ void AboutDialog::loadingHtmlContent()
 
 void AboutDialog::on_pB_qt_clicked()
 {
+    LOG_CALL
+
     QMessageBox::aboutQt(this, tr("%1 uses Qt").arg(PROJECT_PROGNAME));
 }

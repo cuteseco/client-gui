@@ -43,21 +43,6 @@ LoggerTypeDelegate::~LoggerTypeDelegate()
 {
 }
 
-QString LoggerTypeDelegate::type2string(int type)
-{
-    switch(type)
-    {
-    case LOG_DEBUGDETAILINFO:return tr("------------");
-    case LOG_DEBUGINFO:      return tr("   DEBUG    ");
-    case LOG_INFO:           return tr("   Info     ");
-    case LOG_WARNING:        return tr("  Warning   ");
-    case LOG_ERROR:          return tr("   Error    ");
-    case LOG_SECURITYINFO:   return tr("Securityinfo");
-    case LOG_SECURITYERROR:  return tr(" SECURITY!  ");
-    }
-    return "%%%%%";
-}
-
 void LoggerTypeDelegate::paint(QPainter *painter,
                                const QStyleOptionViewItem &option,
                                const QModelIndex &index
@@ -100,7 +85,7 @@ void LoggerTypeDelegate::paint(QPainter *painter,
 
         painter->drawText(option.rect,
                           option.displayAlignment,
-                          type2string(index.data().toInt())
+                          Logger::type2string((LOG_TYPE)index.data().toInt())
                           );
         painter->restore();
     } else

@@ -247,7 +247,6 @@ HEADERS += \
     about/aboutdialog.h \
     logger/logger.h \
     logger/loggertypedelegate.h \
-    logger/logger_include.h \
     config/config.h
 
 FORMS += \
@@ -271,7 +270,7 @@ CODECFORTR = UTF-8
 CODECFORSRC = UTF-8
 
 TRANSLATIONS = \
-    LANG/lang_en.ts
+    LANG/lang_en.ts \
     LANG/lang_de.ts
 
 OTHER_FILES += \

@@ -35,6 +35,8 @@
 #include "cuteseco.h"
 #include "ui_cuteseco.h"
 
+Q_GLOBAL_STATIC(Logger, _LOGGER)
+
 CuteSeCo::CuteSeCo(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CuteSeCo)
@@ -72,6 +74,11 @@ void CuteSeCo::changeEvent(QEvent *event)
     QMainWindow::changeEvent(event);
 }
 
+void CuteSeCo::log(QString logtext, LOG_TYPE type)
+{
+    LOG_DEFAULTLOGPROXY
+}
+
 void CuteSeCo::on_action_Quit_triggered()
 {
     qApp->quit();
@@ -84,6 +91,8 @@ void CuteSeCo::on_action_About_triggered()
 
 void CuteSeCo::createLanguageMenu()
 {
+    LOG_CALL
+
     QActionGroup *languageSelectionGroup = new QActionGroup(ui->menu_Language);
     languageSelectionGroup->setExclusive(true);
 
@@ -123,5 +132,7 @@ void CuteSeCo::createLanguageMenu()
 
 void CuteSeCo::languageChangedEvent(QAction *action)
 {
+    LOG_CALL
+
     Config::loadLanguage(action->data().toString());
 }

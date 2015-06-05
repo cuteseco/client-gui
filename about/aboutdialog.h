@@ -42,6 +42,7 @@
 #include <QTextStream>
 
 #include "config/config.h"
+#include "logger/logger.h"
 
 namespace Ui {
 class AboutDialog;
@@ -64,6 +65,7 @@ private slots:
 private:
     Ui::AboutDialog *ui;
 
+    void log(QString logtext, LOG_TYPE type);
     void updateLabels();
     void loadingHtmlContent();
 };

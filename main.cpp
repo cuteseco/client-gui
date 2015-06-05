@@ -43,7 +43,7 @@ Q_GLOBAL_STATIC(Logger, _LOGGER)
 void log(QString logtext, LOG_TYPE type)
 {
     if (GLOBAL_logger)
-        GLOBAL_logger->add("main:: "+logtext, type);
+        GLOBAL_logger->append(logtext, type);
 }
 
 int main(int argc, char *argv[])
@@ -55,14 +55,16 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
+    log(QString("%1 is starting.").arg(PROJECT_PROGNAME), LOG_INFO);
+
     // logging and log level
 #if defined(PROJECT_DEVELOPERMODE)
-    Config::LOG_LEVEL = LOG_DEBUGDETAILINFO;
+    GLOBAL_logger->setLogLevel(LOG_DEBUGDETAILINFO);
 #else
-    Config::LOG_LEVEL = LOG_ERROR;
+    GLOBAL_logger->setLogLevel(LOG_ERROR);
 #endif
-    GLOBAL_logger->setVerboseLevel(Config::LOG_LEVEL);
 
+    // set up translation
     QTranslator qtTranslator, appTranslator;
     Config::TRANSLATOR_QT = &qtTranslator;
     Config::TRANSLATOR_APP = &appTranslator;
@@ -73,11 +75,12 @@ int main(int argc, char *argv[])
     a.installTranslator(&appTranslator);
 
 
-    log(QString("%1 is starting.").arg(PROJECT_PROGNAME),
-        LOG_DEBUGDETAILINFO);
-
     CuteSeCo w;
     w.show();
 
-    return a.exec();
+    int returncode = a.exec();
+    log(QString("%1 quits. (%2)").arg(PROJECT_PROGNAME).arg(returncode),
+        LOG_INFO
+        );
+    return returncode;
 }
