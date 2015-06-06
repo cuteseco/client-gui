@@ -27,6 +27,8 @@
     <property name="title">
      <string>&amp;Actions</string>
     </property>
+    <addaction name="action_Settings"/>
+    <addaction name="separator"/>
     <addaction name="action_Quit"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
@@ -79,6 +81,15 @@
   <action name="action_English">
    <property name="text">
     <string>&amp;English</string>
+   </property>
+  </action>
+  <action name="action_Settings">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/icomoon/wrench.svg</normaloff>:/images/icomoon/wrench.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Settings</string>
    </property>
   </action>
  </widget>

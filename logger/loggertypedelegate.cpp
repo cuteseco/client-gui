@@ -34,15 +34,28 @@
 
 #include "loggertypedelegate.h"
 
+/*!
+ * Constructor of LoggerTypeDelegate.
+ * \param parent
+ */
 LoggerTypeDelegate::LoggerTypeDelegate(QObject *parent) :
     QStyledItemDelegate(parent)
 {
 }
 
+/*!
+ * Destructor of LoggerTypeDelegate.
+ */
 LoggerTypeDelegate::~LoggerTypeDelegate()
 {
 }
 
+/*!
+ * Paint method for item view.
+ * \param painter
+ * \param option
+ * \param index
+ */
 void LoggerTypeDelegate::paint(QPainter *painter,
                                const QStyleOptionViewItem &option,
                                const QModelIndex &index

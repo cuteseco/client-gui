@@ -32,46 +32,43 @@
  * Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CUTESECO_H
-#define CUTESECO_H
+#ifndef CONFIGDIALOG_H
+#define CONFIGDIALOG_H
 
-#include <QMainWindow>
+#include <QDialog>
 
-#include <about/aboutdialog.h>
-#include <config/configdialog.h>
+#include "config/config.h"
+#include "logger/logger.h"
 
 namespace Ui {
-class CuteSeCo;
+class ConfigDialog;
 }
 
-class CuteSeCo : public QMainWindow
+class ConfigDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit CuteSeCo(QWidget *parent = 0);
-    ~CuteSeCo();
+    explicit ConfigDialog(QWidget *parent = 0);
+    ~ConfigDialog();
+
+    void initProxy();
 
 protected:
     void changeEvent(QEvent *event);
 
 private slots:
-    void languageChangedEvent(QAction *action);
+    void on_buttonBox_accepted();
+    void on_buttonBox_rejected();
 
-    void on_action_Quit_triggered();
-    void on_action_About_triggered();
-
-    void on_action_Settings_triggered();
+    void on_checkB_show_password_toggled(bool checked);
 
 private:
-    Ui::CuteSeCo *ui;
+    Ui::ConfigDialog *ui;
 
     void log(QString logtext, LOG_TYPE type);
-    void createLanguageMenu(void);
 
-    // Dialogs
-    AboutDialog     *aboutDialog;
-    ConfigDialog    *configDialog;
+    QSettings                   settings;
 };
 
-#endif // CUTESECO_H
+#endif // CONFIGDIALOG_H

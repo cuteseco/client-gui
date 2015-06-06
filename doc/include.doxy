@@ -1,0 +1,4 @@
+QUIET                  = YES
+RECURSIVE              = YES
+GENERATE_LATEX         = NO
+@INCLUDE = project.doxy

@@ -39,6 +39,10 @@
 
 Q_GLOBAL_STATIC(Logger, _LOGGER)
 
+/*!
+ * Constructor of Logger class.
+ * \param parent
+ */
 Logger::Logger(QObject *parent) :
     QObject(parent)
 {
@@ -46,30 +50,46 @@ Logger::Logger(QObject *parent) :
     log_level = LOG_DEBUGDETAILINFO;
 }
 
+/*!
+ * \return Pointer to "singleton-class" Logger
+ */
 Logger* Logger::globalInstance()
 {
     return _LOGGER;
 }
 
+/*!
+ * Destructor of Logger class.
+ */
 Logger::~Logger()
 {
 }
 
+/*!
+ * helper: holds text for LOG_TYPE
+ * \param type
+ * \return Human readable string of LOG_TYPE
+ */
 QString Logger::type2string(LOG_TYPE type)
 {
     switch(type)
     {
-    case LOG_DEBUGDETAILINFO:return tr("------------");
-    case LOG_DEBUGINFO:      return tr("   DEBUG    ");
-    case LOG_INFO:           return tr("   Info     ");
-    case LOG_WARNING:        return tr("  Warning   ");
-    case LOG_ERROR:          return tr("   Error    ");
+    case LOG_DEBUGDETAILINFO:return tr("");
+    case LOG_DEBUGINFO:      return tr("DEBUG");
+    case LOG_INFO:           return tr("Info");
+    case LOG_WARNING:        return tr("Warning");
+    case LOG_ERROR:          return tr("Error");
     case LOG_SECURITYINFO:   return tr("Securityinfo");
-    case LOG_SECURITYERROR:  return tr(" SECURITY!  ");
+    case LOG_SECURITYERROR:  return tr("SECURITY!");
     }
     return "%%%%%";
 }
 
+/*!
+ * helper: holds description for LOG_TYPE
+ * \param type
+ * \return Description of LOG_TYPE
+ */
 QString Logger::type2description(LOG_TYPE type)
 {
     switch(type)
@@ -85,15 +105,23 @@ QString Logger::type2description(LOG_TYPE type)
     return "%%%%%";
 }
 
+/*!
+ * Initializes logger class.
+ * connects signals and slots
+ */
 void Logger::init()
 {
     if (GLOBAL_logger->isInitialized() || initialized)
         return;
 
-    connect(GLOBAL_logger, SIGNAL(logoutput(QDateTime,QString,LOG_TYPE)),
-            GLOBAL_logger, SLOT(internalAdd(QDateTime,QString,LOG_TYPE)));
+    connect(GLOBAL_logger,
+            SIGNAL(logoutput(QDateTime,QString,QString,LOG_TYPE)),
+            GLOBAL_logger,
+            SLOT(internalAdd(QDateTime,QString,QString,LOG_TYPE))
+            );
 
     consoleLog(QDateTime::currentDateTime(),
+               LOG_CLASSNAME,
                "--- Log system started ---",
                LOG_INFO
                );
@@ -101,11 +129,18 @@ void Logger::init()
     initialized = true;
 }
 
+/*!
+ * \return State of initialization.
+ */
 bool Logger::isInitialized()
 {
     return initialized;
 }
 
+/*!
+ * Sets the log level to be displayed permanently.
+ * \param level
+ */
 void Logger::setLogLevel(LOG_TYPE level)
 {
     if (!initialized)
@@ -115,33 +150,58 @@ void Logger::setLogLevel(LOG_TYPE level)
 
     QString listLoglevel;
     for (int i=0; i <= log_level; i++)
-        listLoglevel.append(QString("\t\t\"%1\": (%2) %3\n")
-                            .arg(type2string((LOG_TYPE)i))
+        listLoglevel.append(QString("\t\t %1 : (%2) %3\n")
+                            .arg(type2string((LOG_TYPE)i),
+                                 -LOG_TYPENAME_LENGTH,
+                                 '-'
+                                 )
                             .arg(i)
                             .arg(type2description((LOG_TYPE)i)));
 
     consoleLog(QDateTime::currentDateTime(),
+               LOG_CLASSNAME,
                QString("log level is set to: (%1)\n%2")
                .arg(log_level)
-               .arg(listLoglevel),
+               .arg("\n"+listLoglevel),
                LOG_INFO
                );
 }
 
+/*!
+ * \return Current log level.
+ */
 LOG_TYPE Logger::getLogLevel()
 {
     return log_level;
 }
 
-void Logger::append(QString logtext, LOG_TYPE type)
+/*!
+ * public: append log entry
+ * log entry is queued through qt signal pipeline
+ * \param classname
+ * \param logtext
+ * \param type
+ */
+void Logger::append(QString classname, QString logtext, LOG_TYPE type)
 {
     if (!initialized)
         init();
 
-    emit logoutput(QDateTime::currentDateTime(),logtext,type);
+    emit logoutput(QDateTime::currentDateTime(),classname,logtext,type);
 }
 
-void Logger::internalAdd(QDateTime time, QString logtext, LOG_TYPE type)
+/*!
+ * private: processes log entry
+ * \param time
+ * \param classname
+ * \param logtext
+ * \param type
+ */
+void Logger::internalAdd(QDateTime time,
+                         QString classname,
+                         QString logtext,
+                         LOG_TYPE type
+                         )
 {
     if (!initialized)
         init();
@@ -149,14 +209,26 @@ void Logger::internalAdd(QDateTime time, QString logtext, LOG_TYPE type)
     if (type > log_level)
         return;
 
-    consoleLog(time, logtext, type);
+    consoleLog(time, classname, logtext, type);
 }
 
-void Logger::consoleLog(QDateTime time, QString logtext, LOG_TYPE type)
+/*!
+ * console output of a log entry
+ * \param time
+ * \param classname
+ * \param logtext
+ * \param type
+ */
+void Logger::consoleLog(QDateTime time,
+                        QString classname,
+                        QString logtext,
+                        LOG_TYPE type
+                        )
 {
-    QString logline = QString("%1 %2 %3")
+    QString logline = QString("%1 %2 %3 %4")
             .arg(time.toString("dd.MM.yyyy HH:mm:ss.zzz"))
-            .arg(type2string(type))
+            .arg(type2string(type), -LOG_TYPENAME_LENGTH, '-')
+            .arg(classname, -LOG_CLASSNAME_LENGTH)
             .arg(logtext);
 
     switch(type)

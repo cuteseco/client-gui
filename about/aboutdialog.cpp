@@ -37,6 +37,10 @@
 
 Q_GLOBAL_STATIC(Logger, _LOGGER)
 
+/*!
+ * Constructor of AboutDialog.
+ * \param parent
+ */
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AboutDialog)
@@ -53,6 +57,9 @@ AboutDialog::AboutDialog(QWidget *parent) :
     loadingHtmlContent();
 }
 
+/*!
+ * Destructor of AboutDialog.
+ */
 AboutDialog::~AboutDialog()
 {
     delete ui;
@@ -69,24 +76,33 @@ void AboutDialog::changeEvent(QEvent *event)
     QDialog::changeEvent(event);
 }
 
+/*!
+ * helper: log proxy
+ * \param logtext
+ * \param type
+ */
 void AboutDialog::log(QString logtext, LOG_TYPE type)
 {
     LOG_DEFAULTLOGPROXY
 }
 
+/*!
+ * Updates lables after changing language.
+ */
 void AboutDialog::updateLabels()
 {
-    LOG_CALL
+    LOG_CALL;
 
     setWindowTitle(tr("About %1").arg(PROJECT_PROGNAME));
     ui->l_version->setText(Config::getFullProgName());
 }
 
-/* loading html content
+/*!
+ * Loads html content for current language.
  */
 void AboutDialog::loadingHtmlContent()
 {
-    LOG_CALL
+    LOG_CALL;
 
     QString fileName =
             QString(":/about/about_%1.html").arg(Config::getLanguage());
@@ -115,9 +131,12 @@ void AboutDialog::loadingHtmlContent()
     }
 }
 
+/*!
+ * Shows Qt infobox.
+ */
 void AboutDialog::on_pB_qt_clicked()
 {
-    LOG_CALL
+    LOG_CALL;
 
     QMessageBox::aboutQt(this, tr("%1 uses Qt").arg(PROJECT_PROGNAME));
 }

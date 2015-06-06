@@ -93,6 +93,79 @@
     </message>
 </context>
 <context>
+    <name>ConfigDialog</name>
+    <message>
+        <location filename="../config/configdialog.ui" line="14"/>
+        <source>Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../config/configdialog.ui" line="28"/>
+        <source>connectivity settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../config/configdialog.ui" line="34"/>
+        <source>proxy settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../config/configdialog.ui" line="40"/>
+        <source>Use system proxy settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../config/configdialog.ui" line="50"/>
+        <source>No proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../config/configdialog.ui" line="57"/>
+        <source>Manual proxy configuration:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../config/configdialog.ui" line="67"/>
+        <source>manual proxy configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../config/configdialog.ui" line="76"/>
+        <source>HTTP Proxy:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../config/configdialog.ui" line="86"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;http://&amp;lt;proxyserver ip or url&amp;gt;:&amp;lt;port&amp;gt;&lt;/p&gt;&lt;p&gt;e.g.: http://proxyserver.example.org:3128&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../config/configdialog.ui" line="93"/>
+        <source>User:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../config/configdialog.ui" line="103"/>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../config/configdialog.ui" line="113"/>
+        <source>show password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../config/configdialog.ui" line="126"/>
+        <source>important information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../config/configdialog.ui" line="132"/>
+        <source>Please restart program if changes are made.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CuteSeCo</name>
     <message>
         <location filename="../cuteseco.ui" line="14"/>
@@ -105,105 +178,105 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cuteseco.ui" line="34"/>
+        <location filename="../cuteseco.ui" line="36"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cuteseco.ui" line="40"/>
+        <location filename="../cuteseco.ui" line="42"/>
         <source>&amp;Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cuteseco.ui" line="62"/>
+        <location filename="../cuteseco.ui" line="64"/>
         <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cuteseco.ui" line="71"/>
+        <location filename="../cuteseco.ui" line="73"/>
         <source>&amp;About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cuteseco.ui" line="76"/>
+        <location filename="../cuteseco.ui" line="78"/>
         <source>&amp;Deutsch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cuteseco.ui" line="81"/>
+        <location filename="../cuteseco.ui" line="83"/>
         <source>&amp;English</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cuteseco.ui" line="92"/>
+        <source>&amp;Settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>LoggerTypeDelegate</name>
+    <name>Logger</name>
     <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="50"/>
-        <source>------------</source>
+        <location filename="../logger/logger.cpp" line="63"/>
+        <source>DEBUG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="51"/>
-        <source>   DEBUG    </source>
+        <location filename="../logger/logger.cpp" line="64"/>
+        <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="52"/>
-        <source>   Info     </source>
+        <location filename="../logger/logger.cpp" line="65"/>
+        <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="53"/>
-        <source>  Warning   </source>
+        <location filename="../logger/logger.cpp" line="66"/>
+        <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="54"/>
-        <source>   Error    </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="55"/>
+        <location filename="../logger/logger.cpp" line="67"/>
         <source>Securityinfo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="56"/>
-        <source> SECURITY!  </source>
+        <location filename="../logger/logger.cpp" line="68"/>
+        <source>SECURITY!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="65"/>
+        <location filename="../logger/logger.cpp" line="77"/>
         <source>debug detail info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="66"/>
+        <location filename="../logger/logger.cpp" line="78"/>
         <source>debug info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="67"/>
+        <location filename="../logger/logger.cpp" line="79"/>
         <source>info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="68"/>
+        <location filename="../logger/logger.cpp" line="80"/>
         <source>warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="69"/>
+        <location filename="../logger/logger.cpp" line="81"/>
         <source>error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="70"/>
+        <location filename="../logger/logger.cpp" line="82"/>
         <source>security info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/loggertypedelegate.cpp" line="71"/>
+        <location filename="../logger/logger.cpp" line="83"/>
         <source>security alert</source>
         <translation type="unfinished"></translation>
     </message>

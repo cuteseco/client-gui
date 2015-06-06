@@ -36,3 +36,4 @@ Makefile*
 # project specific
 buildno
 passwords
+doc/html

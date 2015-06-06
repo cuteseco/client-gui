@@ -39,25 +39,27 @@
 #include <QTextStream>
 #include <QDateTime>
 
-#define GLOBAL_logger           _LOGGER->globalInstance()
+#define GLOBAL_logger               _LOGGER->globalInstance()
 #define LOG_DEFAULTLOGPROXY     \
-    if (GLOBAL_logger) GLOBAL_logger->append(LOG_CLASSNAME+logtext, type);
-#define LOG_CLASSNAME           QString(this->metaObject()->className())+":: "
+    if (GLOBAL_logger) GLOBAL_logger->append(LOG_CLASSNAME, logtext, type);
+#define LOG_CLASSNAME               QString(this->metaObject()->className())
 
 #if defined(PROJECT_DEVELOPERMODE)
-#define LOG_CALL                log(Q_FUNC_INFO, LOG_DEBUGDETAILINFO);
+#define LOG_CALL                    log(Q_FUNC_INFO, LOG_DEBUGDETAILINFO)
 #else
 #define LOG_CALL
 #endif
 
+#define LOG_CLASSNAME_LENGTH        15
+#define LOG_TYPENAME_LENGTH         12
 
-#define LOG_SECURITYERROR_COLOR      QColor(Qt::red)
-#define LOG_ERROR_COLOR              QColor(Qt::red)
-#define LOG_WARNING_COLOR            QColor(Qt::yellow)
-#define LOG_SECURITYINFO_COLOR       QColor(Qt::green)
-#define LOG_INFO_COLOR               QColor(Qt::green)
-#define LOG_DEBUGINFO_COLOR          QColor(Qt::green)
-#define LOG_DEBUGDETAILINFO_COLOR    QColor(Qt::green)
+#define LOG_SECURITYERROR_COLOR     QColor(Qt::red)
+#define LOG_ERROR_COLOR             QColor(Qt::red)
+#define LOG_WARNING_COLOR           QColor(Qt::yellow)
+#define LOG_SECURITYINFO_COLOR      QColor(Qt::green)
+#define LOG_INFO_COLOR              QColor(Qt::green)
+#define LOG_DEBUGINFO_COLOR         QColor(Qt::green)
+#define LOG_DEBUGDETAILINFO_COLOR   QColor(Qt::green)
 
 enum LOG_TYPES {
     LOG_SECURITYERROR,              /* security-related errors/alerts */
@@ -89,16 +91,28 @@ public:
     void setLogLevel(LOG_TYPE level);
     LOG_TYPE getLogLevel();
 
-    static void consoleLog(QDateTime time, QString logtext, LOG_TYPE type);
+    static void consoleLog(QDateTime time,
+                           QString classname,
+                           QString logtext,
+                           LOG_TYPE type
+                           );
 
 signals:
-    void logoutput(QDateTime time, QString logtext, LOG_TYPE type);
+    void logoutput(QDateTime time,
+                   QString classname,
+                   QString logtext,
+                   LOG_TYPE type
+                   );
 
 public slots:
-    void append(QString logtext, LOG_TYPE type);
+    void append(QString classname, QString logtext, LOG_TYPE type);
 
 private slots:
-    void internalAdd(QDateTime time, QString logtext, LOG_TYPE type);
+    void internalAdd(QDateTime time,
+                     QString classname,
+                     QString logtext,
+                     LOG_TYPE type
+                     );
 
 private:
     bool                initialized;

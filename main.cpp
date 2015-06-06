@@ -40,10 +40,15 @@
 
 Q_GLOBAL_STATIC(Logger, _LOGGER)
 
+/*!
+ * helper: log proxy
+ * \param logtext
+ * \param type
+ */
 void log(QString logtext, LOG_TYPE type)
 {
     if (GLOBAL_logger)
-        GLOBAL_logger->append(logtext, type);
+        GLOBAL_logger->append("", logtext, type);
 }
 
 int main(int argc, char *argv[])

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConfigDialog</class>
+ <widget class="QDialog" name="ConfigDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Config</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resource.qrc">
+    <normaloff>:/images/icomoon/wrench.svg</normaloff>:/images/icomoon/wrench.svg</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>connectivity settings</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QGroupBox" name="gB_proxyuse">
+         <property name="title">
+          <string>proxy settings</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QRadioButton" name="rB_use_system_proxy">
+            <property name="text">
+             <string>Use system proxy settings</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rB_use_no_proxy">
+            <property name="text">
+             <string>No proxy</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rB_use_own_proxy">
+            <property name="text">
+             <string>Manual proxy configuration:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gB_own_proxy">
+         <property name="title">
+          <string>manual proxy configuration</string>
+         </property>
+         <layout class="QFormLayout" name="formLayout_3">
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::ExpandingFieldsGrow</enum>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="l_proxy">
+            <property name="text">
+             <string>HTTP Proxy:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lE_proxy"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="l_proxy_help_description">
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;http://&amp;lt;proxyserver ip or url&amp;gt;:&amp;lt;port&amp;gt;&lt;/p&gt;&lt;p&gt;e.g.: http://proxyserver.example.org:3128&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="l_proxy_user">
+            <property name="text">
+             <string>User:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lE_proxy_user"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="l_proxy_password">
+            <property name="text">
+             <string>Password:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lE_proxy_password"/>
+          </item>
+          <item row="4" column="1">
+           <widget class="QCheckBox" name="checkB_show_password">
+            <property name="text">
+             <string>show password</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gB_information">
+         <property name="styleSheet">
+          <string notr="true">QLabel { font-weight: bold; color: red; }</string>
+         </property>
+         <property name="title">
+          <string>important information</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QLabel" name="l_information">
+            <property name="text">
+             <string>Please restart program if changes are made.</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>8</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../resource.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>ConfigDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>ConfigDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -35,7 +35,7 @@
 #include "config.h"
 
 #undef LOG_CLASSNAME
-#define LOG_CLASSNAME QString("Config:: ")
+#define LOG_CLASSNAME QString("Config")
 
 Q_GLOBAL_STATIC(Logger, _LOGGER)
 
@@ -54,8 +54,10 @@ Config::~Config()
 {
 }
 
-/* :helper
- * log proxy
+/*!
+ * helper: log proxy
+ * \param logtext
+ * \param type
  */
 void Config::log(QString logtext, LOG_TYPE type)
 {
@@ -64,6 +66,8 @@ void Config::log(QString logtext, LOG_TYPE type)
 
 QString Config::getFullProgName()
 {
+    LOG_CALL;
+
     return QString("%1 %2Build:%3 %4 %5 (%6)")
             .arg(PROJECT_PROGNAME)
             .arg(PROJECT_VERSION)
@@ -75,12 +79,18 @@ QString Config::getFullProgName()
 
 QIcon Config::getProgIcon()
 {
+    LOG_CALL;
+
     return QIcon(QString(":/images/logos/%1_logo.svg").arg(PROJECT_PROGNAME));
 }
 
+/*!
+ * Load language and install translation.
+ * \param language
+ */
 void Config::loadLanguage(QString language)
 {
-    LOG_CALL
+    LOG_CALL;
 
     QLocale locale(language);
     QLocale::setDefault(locale);
@@ -117,13 +127,18 @@ void Config::loadLanguage(QString language)
 
 QString Config::getLanguage()
 {
+    LOG_CALL;
+
     return activeLanguage;
 }
 
-// proxy
+/*!
+ * Reads configuration for proxy.
+ * \return proxy
+ */
 QNetworkProxy Config::loadProxy()
 {
-    LOG_CALL
+    LOG_CALL;
 
     QNetworkProxy proxy;
 
@@ -180,19 +195,25 @@ QNetworkProxy Config::loadProxy()
     return proxy;
 }
 
+/*!
+ * Initializes proxy.
+ */
 void Config::initProxy()
 {
-    LOG_CALL
+    LOG_CALL;
 
     setProxy(loadProxy());
 }
 
+/*!
+ * Installs proxy.
+ * \param proxy
+ */
 void Config::setProxy(QNetworkProxy proxy)
 {
-    log(QString("setProxy(QNetworkProxy proxy) %1")
-        .arg(proxy2String(proxy)),
-        LOG_DEBUGDETAILINFO
-        );
+    LOG_CALL;
+
+    log(QString("proxy: %1").arg(proxy2String(proxy)), LOG_DEBUGINFO);
     my_proxy = proxy;
     QNetworkProxy::setApplicationProxy(my_proxy);
 }
@@ -202,6 +223,11 @@ QNetworkProxy Config::getProxy()
     return my_proxy;
 }
 
+/*!
+ * helper: human readable proxy configuration
+ * \param proxy
+ * \return configuration of proxy in a url
+ */
 QString Config::proxy2String(QNetworkProxy proxy)
 {
     QString proxytype("");
@@ -251,7 +277,7 @@ QString Config::proxy2String(QNetworkProxy proxy)
 
 QString Config::getStoragePath()
 {
-    LOG_CALL
+    LOG_CALL;
 
     QString storagePath =
             QStandardPaths::writableLocation(QStandardPaths::DataLocation);
@@ -263,7 +289,7 @@ QString Config::getStoragePath()
 
 QString Config::getDownloadPath()
 {
-    LOG_CALL
+    LOG_CALL;
 
     QString downloadPath =
             QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
@@ -276,7 +302,7 @@ QString Config::getDownloadPath()
 
 QString Config::getDocumentPath()
 {
-    LOG_CALL
+    LOG_CALL;
 
     QString documentPath =
             QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
@@ -289,7 +315,7 @@ QString Config::getDocumentPath()
 
 QString Config::getTempPath()
 {
-    LOG_CALL
+    LOG_CALL;
 
     QString tempPath =
             QStandardPaths::writableLocation(QStandardPaths::TempLocation);
@@ -302,7 +328,7 @@ QString Config::getTempPath()
 
 QString Config::getCachePath()
 {
-    LOG_CALL
+    LOG_CALL;
 
     QString cachePath =
             QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
@@ -314,14 +340,14 @@ QString Config::getCachePath()
 
 QString Config::getSettingsPath()
 {
-    LOG_CALL
+    LOG_CALL;
 
     return settings.fileName();
 }
 
 QString Config::getSystemLocale()
 {
-    LOG_CALL
+    LOG_CALL;
 
     QString defaultLocale = QLocale::system().name();
     int pos = defaultLocale.lastIndexOf('_');
@@ -332,17 +358,21 @@ QString Config::getSystemLocale()
 
 QString Config::getOSType()
 {
+    LOG_CALL;
+
     return _OS_TYPE;
 }
 
 QString Config::getArchitecture()
 {
+    LOG_CALL;
+
     return _ARCHITECTURE;
 }
 
 QString Config::getOSName()
 {
-    LOG_CALL
+    LOG_CALL;
 
     QString OS = "not supported";
 
@@ -467,7 +497,7 @@ QString Config::getOSName()
 
 bool Config::isAdministrator()
 {
-    LOG_CALL
+    LOG_CALL;
 
 #if defined(Q_OS_LINUX)
     return (getuid() ? false : true);

@@ -37,6 +37,10 @@
 
 Q_GLOBAL_STATIC(Logger, _LOGGER)
 
+/*!
+ * Constructor of CuteSeCo main class.
+ * \param parent
+ */
 CuteSeCo::CuteSeCo(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CuteSeCo)
@@ -44,15 +48,24 @@ CuteSeCo::CuteSeCo(QWidget *parent) :
     ui->setupUi(this);
 
     aboutDialog = new AboutDialog();
+    configDialog = new ConfigDialog();
 
     setWindowIcon(Config::getProgIcon());
 
+    // actions menu
+    ui->action_Settings->setShortcut(KS_SETTINGS);
+    ui->action_Quit->setShortcut(KS_QUIT);
+
+    // language menu
     createLanguageMenu();
 
-    ui->action_Quit->setShortcut(KS_QUIT);
+    // help menu
     ui->action_About->setShortcut(KS_HELP);
 }
 
+/*!
+ * Destructor of CuteSeCo main class.
+ */
 CuteSeCo::~CuteSeCo()
 {
     delete ui;
@@ -74,24 +87,43 @@ void CuteSeCo::changeEvent(QEvent *event)
     QMainWindow::changeEvent(event);
 }
 
+/*!
+ * helper: log proxy
+ * \param logtext
+ * \param type
+ */
 void CuteSeCo::log(QString logtext, LOG_TYPE type)
 {
     LOG_DEFAULTLOGPROXY
 }
 
+void CuteSeCo::on_action_Settings_triggered()
+{
+    LOG_CALL;
+
+    configDialog->show();
+}
+
 void CuteSeCo::on_action_Quit_triggered()
 {
+    LOG_CALL;
+
     qApp->quit();
 }
 
 void CuteSeCo::on_action_About_triggered()
 {
+    LOG_CALL;
+
     aboutDialog->show();
 }
 
+/*!
+ * Searches for existing language files and builds a menu for language choosing.
+ */
 void CuteSeCo::createLanguageMenu()
 {
-    LOG_CALL
+    LOG_CALL;
 
     QActionGroup *languageSelectionGroup = new QActionGroup(ui->menu_Language);
     languageSelectionGroup->setExclusive(true);
@@ -130,9 +162,14 @@ void CuteSeCo::createLanguageMenu()
     }
 }
 
+/*!
+ * SLOT: triggered on language change
+ * \param action
+ */
 void CuteSeCo::languageChangedEvent(QAction *action)
 {
-    LOG_CALL
+    LOG_CALL;
 
     Config::loadLanguage(action->data().toString());
 }
+

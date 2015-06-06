@@ -229,6 +229,23 @@ win32: {
     RC_FILE = $${TARGET}.rc
 }
 
+
+# doxygen update
+unix: {
+    DOXYFILE = $${PWD}/doc/project.doxy
+    update-doc.commands = @echo INFO: updating documentation $${CONCAT}
+    update-doc.commands += $(DEL_FILE) $${DOXYFILE} $${CONCAT}
+    update-doc.commands += \
+        echo "PROJECT_NAME = $${TARGET}" >> $${DOXYFILE} $${CONCAT}
+    update-doc.commands += \
+        echo "PROJECT_NUMBER = $${VERSION}" >> $${DOXYFILE} $${CONCAT}
+    update-doc.commands += \
+        echo "INPUT = index.doc ../" >> $${DOXYFILE} $${CONCAT}
+    update-doc.commands += cd $${PWD}/doc $${CONCAT} doxygen
+}
+QMAKE_EXTRA_TARGETS += update-doc
+
+
 message(extra targets: $$QMAKE_EXTRA_TARGETS)
 export(first.depends)
 QMAKE_EXTRA_TARGETS += first
@@ -239,7 +256,8 @@ SOURCES += \
     about/aboutdialog.cpp \
     logger/logger.cpp \
     logger/loggertypedelegate.cpp \
-    config/config.cpp
+    config/config.cpp \
+    config/configdialog.cpp
 
 HEADERS += \
     buildno.h \
@@ -247,11 +265,13 @@ HEADERS += \
     about/aboutdialog.h \
     logger/logger.h \
     logger/loggertypedelegate.h \
-    config/config.h
+    config/config.h \
+    config/configdialog.h
 
 FORMS += \
     cuteseco.ui \
-    about/aboutdialog.ui
+    about/aboutdialog.ui \
+    config/configdialog.ui
 
 RESOURCES += \
     resource.qrc
@@ -286,5 +306,8 @@ OTHER_FILES += \
     $${PROGNAME}Developer.desktop \
     $${PROGNAME}Developer.rc \
     $${PROGNAME}Developer.sh \
+    doc/Doxyfile \
+    doc/include.doxy \
+    doc/index.doc \
     SCRIPTS/increment-buildno.bat \
     SCRIPTS/increment-buildno
