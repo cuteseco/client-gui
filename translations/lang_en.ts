@@ -77,17 +77,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../about/aboutdialog.ui" line="327"/>
+        <location filename="../about/aboutdialog.ui" line="320"/>
+        <source>&lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;http://www.gnu.org/licenses/&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../about/aboutdialog.ui" line="364"/>
         <source>&lt;a href=&quot;http://qt.io&quot;&gt;http://qt.io&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../about/aboutdialog.cpp" line="81"/>
+        <location filename="../about/aboutdialog.cpp" line="96"/>
         <source>About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../about/aboutdialog.cpp" line="122"/>
+        <location filename="../about/aboutdialog.cpp" line="141"/>
         <source>%1 uses Qt</source>
         <translation type="unfinished"></translation>
     </message>
@@ -216,67 +221,67 @@
 <context>
     <name>Logger</name>
     <message>
-        <location filename="../logger/logger.cpp" line="63"/>
+        <location filename="../logger/logger.cpp" line="78"/>
         <source>DEBUG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/logger.cpp" line="64"/>
+        <location filename="../logger/logger.cpp" line="79"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/logger.cpp" line="65"/>
+        <location filename="../logger/logger.cpp" line="80"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/logger.cpp" line="66"/>
+        <location filename="../logger/logger.cpp" line="81"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/logger.cpp" line="67"/>
+        <location filename="../logger/logger.cpp" line="82"/>
         <source>Securityinfo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/logger.cpp" line="68"/>
+        <location filename="../logger/logger.cpp" line="83"/>
         <source>SECURITY!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/logger.cpp" line="77"/>
+        <location filename="../logger/logger.cpp" line="97"/>
         <source>debug detail info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/logger.cpp" line="78"/>
+        <location filename="../logger/logger.cpp" line="98"/>
         <source>debug info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/logger.cpp" line="79"/>
+        <location filename="../logger/logger.cpp" line="99"/>
         <source>info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/logger.cpp" line="80"/>
+        <location filename="../logger/logger.cpp" line="100"/>
         <source>warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/logger.cpp" line="81"/>
+        <location filename="../logger/logger.cpp" line="101"/>
         <source>error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/logger.cpp" line="82"/>
+        <location filename="../logger/logger.cpp" line="102"/>
         <source>security info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../logger/logger.cpp" line="83"/>
+        <location filename="../logger/logger.cpp" line="103"/>
         <source>security alert</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,0 +1,61 @@
+#!/bin/bash
+
+. ../config.pri
+
+TARGET_DIR=../${ICON_DIR}
+SRC=../../images/logos/${PROGNAME}_Logo.svg
+SRC_DEV=../../images/logos/${PROGNAME}Developer_Logo.svg
+
+################################################################################
+
+mkdir -p $TARGET_DIR
+cd $TARGET_DIR
+
+# generate application icons in different resolutions
+R="16 22 32 36 48 64 72 96 128 192 256 512"
+for i in $R;
+do
+    inkscape \
+        --export-png=${PROGNAME}_${i}.png \
+        --export-width=$i \
+        --export-height=$i \
+        $SRC
+
+    inkscape \
+        --export-png=${PROGNAME}Developer_${i}.png \
+        --export-width=$i \
+        --export-height=$i \
+        $SRC_DEV
+done
+
+# default application icon size is of 48x48
+cp ${PROGNAME}_48.png ${PROGNAME}.png
+cp ${PROGNAME}Developer_48.png ${PROGNAME}Developer.png
+
+# generate windows .ico and os x .tiff (->icns)
+S=(16 24 32 48 64 128 256 512)
+ICOFILES=()
+ICOFILES_DEV=()
+for i in "${S[@]}";
+do
+    ICOFILES=( ${ICOFILES[@]} ${PROGNAME}_${i}.ico.png )
+    inkscape \
+        --export-png=${ICOFILES[${#ICOFILES[@]}-1]} \
+        --export-width=$i \
+        --export-height=$i \
+        $SRC
+
+    ICOFILES_DEV=( ${ICOFILES_DEV[@]} ${PROGNAME}Developer_${i}.ico.png )
+    inkscape \
+        --export-png=${ICOFILES_DEV[${#ICOFILES_DEV[@]}-1]} \
+        --export-width=$i \
+        --export-height=$i \
+        $SRC_DEV
+done
+for filetype in ico tiff;
+do
+    convert "${ICOFILES[@]}" ${PROGNAME}.$filetype
+    convert "${ICOFILES_DEV[@]}" ${PROGNAME}Developer.$filetype
+done
+rm ${ICOFILES[@]}
+rm ${ICOFILES_DEV[@]}

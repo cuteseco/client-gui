@@ -140,3 +140,13 @@ void AboutDialog::on_pB_qt_clicked()
 
     QMessageBox::aboutQt(this, tr("%1 uses Qt").arg(PROJECT_PROGNAME));
 }
+
+/*!
+ * Shows license text.
+ */
+void AboutDialog::on_pB_AGPLv3_clicked()
+{
+    LOG_CALL;
+
+    ui->tabWidget->setCurrentIndex(ui->tabWidget->count()-1);
+}

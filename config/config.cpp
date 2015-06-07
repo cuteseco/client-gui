@@ -81,7 +81,7 @@ QIcon Config::getProgIcon()
 {
     LOG_CALL;
 
-    return QIcon(QString(":/images/logos/%1_logo.svg").arg(PROJECT_PROGNAME));
+    return QIcon(QString(":/images/logos/%1_Logo.svg").arg(PROJECT_PROGNAME));
 }
 
 /*!

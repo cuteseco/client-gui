@@ -4,16 +4,19 @@
         <file>about/about_de.html</file>
         <file>about/about_en.html</file>
         <file>about/stylesheet.css</file>
-        <file>images/logos/Qt_logo.svg</file>
-        <file>images/logos/CuteSeCo_logo.svg</file>
-        <file>images/logos/CuteSeCoDeveloper_logo.svg</file>
+        <file>images/logos/AGPLv3_Logo.svg</file>
+        <file>images/logos/CuteSeCo_Logo.svg</file>
+        <file>images/logos/CuteSeCoDeveloper_Logo.svg</file>
+        <file>images/logos/Qt_Logo.svg</file>
         <file>images/icomoon/bug.svg</file>
         <file>images/icomoon/info.svg</file>
         <file>images/icomoon/switch.svg</file>
         <file>images/icomoon/wrench.svg</file>
-        <file>translations/lang_en.qm</file>
-        <file>images/flags/en.png</file>
-        <file>translations/lang_de.qm</file>
-        <file>images/flags/de.png</file>
+        <file>images/flags/flag_de.png</file>
+        <file>images/flags/flag_en.png</file>
+    </qresource>
+    <qresource prefix="/translations">
+        <file alias="lang_en.qm">install/translations/lang_en.qm</file>
+        <file alias="lang_de.qm">install/translations/lang_de.qm</file>
     </qresource>
 </RCC>

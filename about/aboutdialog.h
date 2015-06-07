@@ -62,6 +62,8 @@ protected:
 private slots:
     void on_pB_qt_clicked();
 
+    void on_pB_AGPLv3_clicked();
+
 private:
     Ui::AboutDialog *ui;
 

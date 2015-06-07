@@ -145,7 +145,7 @@ void CuteSeCo::createLanguageMenu()
         locale.truncate(locale.lastIndexOf('.'));
         locale.remove(0, locale.indexOf('_')+1);
 
-        QIcon icon(":/images/flags/"+locale+".png");
+        QIcon icon(":/images/flags/flag_"+locale+".png");
 
         QAction *action = new QAction(
                     icon,

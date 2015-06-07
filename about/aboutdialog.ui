@@ -296,6 +296,43 @@
        </spacer>
       </item>
       <item>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QPushButton" name="pB_AGPLv3">
+          <property name="icon">
+           <iconset resource="../resource.qrc">
+            <normaloff>:/images/logos/AGPLv3_Logo.svg</normaloff>:/images/logos/AGPLv3_Logo.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>180</width>
+            <height>75</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="l_AGPLv3_url">
+          <property name="text">
+           <string>&lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;http://www.gnu.org/licenses/&lt;/a&gt;</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
+          </property>
+          <property name="textInteractionFlags">
+           <set>Qt::TextBrowserInteraction</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
        <widget class="QFrame" name="frame_qt">
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
@@ -308,7 +345,7 @@
           <widget class="QPushButton" name="pB_qt">
            <property name="icon">
             <iconset resource="../resource.qrc">
-             <normaloff>:/images/logos/Qt_logo.svg</normaloff>:/images/logos/Qt_logo.svg</iconset>
+             <normaloff>:/images/logos/Qt_Logo.svg</normaloff>:/images/logos/Qt_Logo.svg</iconset>
            </property>
            <property name="iconSize">
             <size>

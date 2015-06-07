@@ -31,13 +31,7 @@
 # diesem Programm erhalten haben.
 # Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 
-PROGNAME="CuteSeCo"
-VERSION="0.0.1"
-#STATE="final"
-#STATE="beta"
-#STATE="alpha"
-STATE="experimental"
-
+include(config.pri)
 
 # Qt libraries
 QT += core
@@ -143,41 +137,41 @@ QMAKE_EXTRA_TARGETS += increment-buildno
 
 
 # copy scripts to build dir
-copyscripts.commands = @echo INFO: copying scripts $${CONCAT}
-!win32:copyscripts.commands += \
+copy-scripts.commands = @echo INFO: copying scripts $${CONCAT}
+!win32:copy-scripts.commands += \
     $(COPY_DIR) \"$${PWD}/SCRIPTS\" \"$${DESTDIR}/\"
-win32:copyscripts.commands  += \
+win32:copy-scripts.commands  += \
     $(COPY_DIR) \"$${PWD}/SCRIPTS\" \"$${DESTDIR}/SCRIPTS\"
-export(copyscripts.commands)
-first.depends += copyscripts
-QMAKE_EXTRA_TARGETS += copyscripts
+export(copy-scripts.commands)
+first.depends += copy-scripts
+QMAKE_EXTRA_TARGETS += copy-scripts
 
 
 # copy translations to build dir
-copytranslations.commands = @echo INFO: copying translations $${CONCAT}
-!macx:!win32:copytranslations.commands += \
+copy-translations.commands = @echo INFO: copying translations $${CONCAT}
+!macx:!win32:copy-translations.commands += \
     $(COPY_DIR) \"$${PWD}/translations\" \"$${DESTDIR}/\"
-win32:copytranslations.commands += \
+win32:copy-translations.commands += \
     $(COPY_DIR) \"$${PWD}/translations\" \"$${DESTDIR}/translations\"
-macx:copytranslations.commands  += \
+macx:copy-translations.commands  += \
     $(COPY_DIR) \
     \"$${PWD}/translations\" \
     \"$${DESTDIR}/$${TARGET}.app/Contents/MacOS/\"
-export(copytranslations.commands)
-first.depends += copytranslations
-QMAKE_EXTRA_TARGETS += copytranslations
+export(copy-translations.commands)
+first.depends += copy-translations
+QMAKE_EXTRA_TARGETS += copy-translations
 
 
 # strip unneeded
-stripunneeded.commands = @echo INFO: removing ballast $${CONCAT}
+strip-unneeded.commands = @echo INFO: removing ballast $${CONCAT}
 unix:!macx {
-    stripunneeded.commands += \
+    strip-unneeded.commands += \
         strip --strip-unneeded $${DESTDIR}/$${TARGET} $${CONCAT}
-    stripunneeded.commands += \
+    strip-unneeded.commands += \
         strip --remove-section=.comment $${DESTDIR}/$${TARGET} $${CONCAT}
 }
 macx: {
-    stripunneeded.commands += \
+    strip-unneeded.commands += \
         dsymutil \
         $${TARGET}.app/Contents/MacOS/$${TARGET} \
         -o $${TARGET}.app.dSYM $${CONCAT}
@@ -186,20 +180,20 @@ win32: {
     # do nothing, be fat
 }
 CONFIG(release, debug|release) {
-    first.depends += stripunneeded
+    first.depends += strip-unneeded
     export(first.depends)
 }
-QMAKE_EXTRA_TARGETS += stripunneeded
+QMAKE_EXTRA_TARGETS += strip-unneeded
 
 
 # copy binary
 win32: {
-    copybinary.commands = @echo INFO: copying binary $${CONCAT}
-    copybinary.commands += \
+    copy-binary.commands = @echo INFO: copying binary $${CONCAT}
+    copy-binary.commands += \
         $(COPY) \"$${DESTDIR}\\$${TARGET}.exe\" \"Z:\\$${TARGET}.exe\"
-    first.depends += copybinary
-    export(copybinary.commands)
-    QMAKE_EXTRA_TARGETS += copybinary
+    first.depends += copy-binary
+    export(copy-binary.commands)
+    QMAKE_EXTRA_TARGETS += copy-binary
 }
 
 
@@ -290,24 +284,28 @@ CODECFORTR = UTF-8
 CODECFORSRC = UTF-8
 
 TRANSLATIONS = \
-    LANG/lang_en.ts \
-    LANG/lang_de.ts
+    translations/lang_en.ts \
+    translations/lang_de.ts
 
 OTHER_FILES += \
+    AUTHORS \
     buildno \
-    CHANGELOG.txt \
-    components.txt \
+    CHANGELOG \
+    config.pri \
+    COPYRIGHT_TEMPLATE \
     LICENSE \
-    LICENSE_HEADER \
     README.md \
-    $${PROGNAME}.desktop \
+    SECURITY \
     $${PROGNAME}.rc \
-    $${PROGNAME}.sh \
-    $${PROGNAME}Developer.desktop \
     $${PROGNAME}Developer.rc \
-    $${PROGNAME}Developer.sh \
     doc/Doxyfile \
     doc/include.doxy \
     doc/index.doc \
+    images/AUTHORS \
+    install/$${PROGNAME}.desktop \
+    install/$${PROGNAME}.sh \
+    install/$${PROGNAME}Developer.desktop \
+    install/$${PROGNAME}Developer.sh \
     SCRIPTS/increment-buildno.bat \
-    SCRIPTS/increment-buildno
+    SCRIPTS/increment-buildno \
+    translations/AUTHORS
