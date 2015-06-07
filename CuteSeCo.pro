@@ -226,7 +226,7 @@ win32: {
 
 # doxygen update
 unix: {
-    DOXYFILE = $${PWD}/doc/project.doxy
+    DOXYFILE = $${PWD}/DOC/project.doxy
     update-doc.commands = @echo INFO: updating documentation $${CONCAT}
     update-doc.commands += $(DEL_FILE) $${DOXYFILE} $${CONCAT}
     update-doc.commands += \
@@ -235,7 +235,7 @@ unix: {
         echo "PROJECT_NUMBER = $${VERSION}" >> $${DOXYFILE} $${CONCAT}
     update-doc.commands += \
         echo "INPUT = index.doc ../" >> $${DOXYFILE} $${CONCAT}
-    update-doc.commands += cd $${PWD}/doc $${CONCAT} doxygen
+    update-doc.commands += cd $${PWD}/DOC $${CONCAT} doxygen
 }
 QMAKE_EXTRA_TARGETS += update-doc
 
@@ -298,14 +298,14 @@ OTHER_FILES += \
     SECURITY \
     $${PROGNAME}.rc \
     $${PROGNAME}Developer.rc \
-    doc/Doxyfile \
-    doc/include.doxy \
-    doc/index.doc \
+    DOC/Doxyfile \
+    DOC/include.doxy \
+    DOC/index.doc \
     images/AUTHORS \
-    install/$${PROGNAME}.desktop \
-    install/$${PROGNAME}.sh \
-    install/$${PROGNAME}Developer.desktop \
-    install/$${PROGNAME}Developer.sh \
+    INSTALL/$${PROGNAME}.desktop \
+    INSTALL/$${PROGNAME}.sh \
+    INSTALL/$${PROGNAME}Developer.desktop \
+    INSTALL/$${PROGNAME}Developer.sh \
     SCRIPTS/increment-buildno.bat \
     SCRIPTS/increment-buildno \
     translations/AUTHORS

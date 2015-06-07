@@ -8,6 +8,6 @@ VERSION="0.0.1"
 STATE="experimental"
 
 # directories
-ICON_DIR=install/icons/
-TRANSLATION_DIR=install/translations/
+ICON_DIR=INSTALL/icons/
+TRANSLATION_DIR=INSTALL/translations/
 
