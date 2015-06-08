@@ -126,6 +126,16 @@ message("$${TARGET}    "\
         )
 
 
+# generate files from templates
+app-rc.input = $${PWD}/TEMPLATES/app.rc
+app-rc.output = $${PWD}/$${PROGNAME}.rc
+appDeveloper-rc.input = $${PWD}/TEMPLATES/appDeveloper.rc
+appDeveloper-rc.output = $${PWD}/$${PROGNAME}Developer.rc
+copyright-template.input = $${PWD}/TEMPLATES/COPYRIGHT_TEMPLATE
+copyright-template.output = $${PWD}/COPYRIGHT_TEMPLATE
+QMAKE_SUBSTITUTES += app-rc appDeveloper-rc copyright-template
+
+
 # increment build no
 increment-buildno.commands = @echo INFO: incrementing build no $${CONCAT}
 unix:increment-buildno.commands += \

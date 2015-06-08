@@ -2,6 +2,8 @@
 
 PROGNAME="CuteSeCo"
 VERSION="0.0.1"
+COPYRIGHT_HOLDER="Christian Höne <christianhoene@cuteseco.org>"
+COPYRIGHT_YEAR="2015"
 #STATE="final"
 #STATE="beta"
 #STATE="alpha"

@@ -54,8 +54,8 @@ do
 done
 for filetype in ico tiff;
 do
-    convert "${ICOFILES[@]}" ${PROGNAME}.$filetype
-    convert "${ICOFILES_DEV[@]}" ${PROGNAME}Developer.$filetype
+    convert "${ICOFILES[@]}" ../../images/icons/${PROGNAME}.$filetype
+    convert "${ICOFILES_DEV[@]}" ../../images/icons/${PROGNAME}Developer.$filetype
 done
 rm ${ICOFILES[@]}
 rm ${ICOFILES_DEV[@]}
