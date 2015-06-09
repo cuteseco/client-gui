@@ -31,7 +31,12 @@
 # diesem Programm erhalten haben.
 # Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 
+lessThan(QT_MAJOR_VERSION, 5): {
+    error("Requires Qt 5 and higher.")
+}
+
 include(config.pri)
+
 
 # Qt libraries
 QT += core
@@ -58,7 +63,6 @@ RCC_DIR     = tmp/rcc
 # target config
 TARGET = $${PROGNAME}
 TEMPLATE = app
-CONFIG += static
 
 
 # Development (debug build)
@@ -67,8 +71,7 @@ CONFIG(debug, debug|release) {
     DEFINES += PROJECT_DEVELOPERMODE
     # windows only:
     DLLSUFFIX = "d"
-} else
-{
+} else {
     # windows only:
     DLLSUFFIX = ""
 }
@@ -93,6 +96,9 @@ macx: {
 
 
 # some definitions
+CODECFORTR = UTF-8
+CODECFORSRC = UTF-8
+PROJECT_MESSAGE = "$$escape_expand(\\n\\n)"
 BUILDNO = $$cat(buildno)
 
 macx: {
@@ -117,13 +123,13 @@ DEFINES += PROJECT_VERSION="'\"$${VERSION}\"'"
 DEFINES += PROJECT_BUILDNO="'\"$${BUILDNO}\"'"
 DEFINES += PROJECT_GIT_VERSION="'\"$${GIT_VERSION}\"'"
 DEFINES += PROJECT_STATE="'\"$${STATE}\"'"
-message("$${TARGET}    "\
-        "Version: $${VERSION}    "\
-        "Build: $${BUILDNO}    "\
-        "Git: $${GIT_VERSION}    "\
-        "Arch: $${QMAKE_TARGET.arch}    "\
-        "(Qt $${QT_VERSION}) "\
-        )
+PROJECT_MESSAGE +=  "$${TARGET}    "\
+                    "Version: $${VERSION}    "\
+                    "Build: $${BUILDNO}    "\
+                    "Git: $${GIT_VERSION}    "\
+                    "Arch: $${QMAKE_TARGET.arch}    "\
+                    "(Qt $${QT_VERSION})" \
+                    "$$escape_expand(\\n)"
 
 
 # generate files from templates
@@ -237,20 +243,23 @@ win32: {
 # doxygen update
 unix: {
     DOXYFILE = $${PWD}/DOC/project.doxy
-    update-doc.commands = @echo INFO: updating documentation $${CONCAT}
-    update-doc.commands += $(DEL_FILE) $${DOXYFILE} $${CONCAT}
-    update-doc.commands += \
+    build-doc.commands = @echo INFO: updating documentation $${CONCAT}
+    build-doc.commands += $(DEL_FILE) $${DOXYFILE} $${CONCAT}
+    build-doc.commands += \
         echo "PROJECT_NAME = $${TARGET}" >> $${DOXYFILE} $${CONCAT}
-    update-doc.commands += \
+    build-doc.commands += \
         echo "PROJECT_NUMBER = $${VERSION}" >> $${DOXYFILE} $${CONCAT}
-    update-doc.commands += \
+    build-doc.commands += \
         echo "INPUT = index.doc ../" >> $${DOXYFILE} $${CONCAT}
-    update-doc.commands += cd $${PWD}/DOC $${CONCAT} doxygen
+    build-doc.commands += cd $${PWD}/DOC $${CONCAT} doxygen
+    #exists(/usr/bin/doxygen):QMAKE_EXTRA_TARGETS += build-doc
+    #!$$system(which doxygenn &> /dev/null;) { message(bla) }
+    $$system(which doxygenn):message(bla)
 }
-QMAKE_EXTRA_TARGETS += update-doc
 
 
-message(extra targets: $$QMAKE_EXTRA_TARGETS)
+PROJECT_MESSAGE +=  "- extra targets: $$QMAKE_EXTRA_TARGETS" \
+                    "$$escape_expand(\\n)"
 export(first.depends)
 QMAKE_EXTRA_TARGETS += first
 
@@ -281,7 +290,8 @@ RESOURCES += \
     resource.qrc
 
 CONFIG(debug, debug|release) {
-message(+development mode)
+PROJECT_MESSAGE +=  "- developer (debug) mode" \
+                    "$$escape_expand(\\n)"
 
 #SOURCES += \
 
@@ -289,9 +299,6 @@ message(+development mode)
 
 #FORMS += \
 }
-
-CODECFORTR = UTF-8
-CODECFORSRC = UTF-8
 
 TRANSLATIONS = \
     translations/lang_en.ts \
@@ -319,3 +326,5 @@ OTHER_FILES += \
     SCRIPTS/increment-buildno.bat \
     SCRIPTS/increment-buildno \
     translations/AUTHORS
+
+message($$PROJECT_MESSAGE)
