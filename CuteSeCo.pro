@@ -137,8 +137,8 @@ app-rc.input = $${PWD}/TEMPLATES/app.rc
 app-rc.output = $${PWD}/$${PROGNAME}.rc
 appDeveloper-rc.input = $${PWD}/TEMPLATES/appDeveloper.rc
 appDeveloper-rc.output = $${PWD}/$${PROGNAME}Developer.rc
-copyright-template.input = $${PWD}/TEMPLATES/COPYRIGHT_TEMPLATE
-copyright-template.output = $${PWD}/COPYRIGHT_TEMPLATE
+copyright-template.input = $${PWD}/TEMPLATES/COPYRIGHT_TEMPLATE.in
+copyright-template.output = $${PWD}/TEMPLATES/COPYRIGHT_TEMPLATE
 QMAKE_SUBSTITUTES += app-rc appDeveloper-rc copyright-template
 
 
@@ -252,9 +252,7 @@ unix: {
     build-doc.commands += \
         echo "INPUT = index.doc ../" >> $${DOXYFILE} $${CONCAT}
     build-doc.commands += cd $${PWD}/DOC $${CONCAT} doxygen
-    #exists(/usr/bin/doxygen):QMAKE_EXTRA_TARGETS += build-doc
-    #!$$system(which doxygenn &> /dev/null;) { message(bla) }
-    $$system(which doxygenn):message(bla)
+    exists(/usr/bin/doxygen):QMAKE_EXTRA_TARGETS += build-doc
 }
 
 
